@@ -1,0 +1,31 @@
+{
+  "name": "inmo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Markkos89/inmo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Markkos89/inmo/issues"
+  },
+  "homepage": "https://github.com/Markkos89/inmo#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "consolidate": "^0.15.1",
+    "express": "^4.16.4",
+    "logfmt": "^1.2.1",
+    "method-override": "^3.0.0",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
