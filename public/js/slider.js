@@ -59,3 +59,8 @@ if (auto) {
   // Run next slide at interval time
   slideInterval = setInterval(nextSlide, intervalTime);
 }
+
+ $('.carousel.carousel-slider').carousel({
+    fullWidth: true,
+    indicators: true
+  });

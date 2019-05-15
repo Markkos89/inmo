@@ -1,50 +1,211 @@
 {% extends 'template.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="col m4 s12">
-      	<h6 style="letter-spacing: .06em; margin-bottom: 18px;">Categorias</h6>
-      	<div style="position: relative; height: 1px; padding: 0; background: #d9d9d9; border: none;"></div>
-      	<p>
-	      	<label>
-	        	<input type="checkbox" />
-	        	<span>Red</span>
-	      	</label>
-	    </p>
-    </div>
-    <div class="col m8 s12">
-    	<div class="row">
-    		<div class="col m6"><div class="card">
-		    <div class="card-image waves-effect waves-block waves-light">
-		      <img class="activator" src="images/background.jpg">
-		    </div>
-		    <div class="card-content">
-		      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-		      <p><a href="#">This is a link</a></p>
-		    </div>
-		    <div class="card-reveal">
-		      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-		      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-		    </div>
-		  </div></div>
-    		<div class="col m6">
-    			<div class="card">
-		    <div class="card-image waves-effect waves-block waves-light">
-		      <img class="activator" src="images/background.jpg">
-		    </div>
-		    <div class="card-content">
-		      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-		      <p><a href="#">This is a link</a></p>
-		    </div>
-		    <div class="card-reveal">
-		      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-		      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-		    </div>
-		  </div>
-    		</div>
-    	</div>
-    </div>
+
+
+
+<!-- <div class="row">
+	<div class="col m4 s12">
+		<h6 style="letter-spacing: .06em; margin-bottom: 18px;">Categorias</h6>
+		<div style="position: relative; height: 1px; padding: 0; background: #d9d9d9; border: none;"></div>
+		<p>
+			<label>
+				<input type="checkbox" />
+				<span>Red</span>
+			</label>
+		</p>
+	</div>
+	<div class="col m8 s12">
+		<div class="row">
+			<div class="col m6"><div class="card">
+				<div class="card-image waves-effect waves-block waves-light">
+					<img class="activator" src="images/background.jpg">
+				</div>
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+					<p><a href="#">This is a link</a></p>
+				</div>
+				<div class="card-reveal">
+					<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+					<p>Here is some more information about this product that is only revealed once clicked on.</p>
+				</div>
+			</div></div>
+			<div class="col m6">
+				<div class="card">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator" src="images/background.jpg">
+					</div>
+					<div class="card-content">
+						<span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+						<p><a href="#">This is a link</a></p>
+					</div>
+					<div class="card-reveal">
+						<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+						<p>Here is some more information about this product that is only revealed once clicked on.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<br>
+
+
+
+<div class="row">
+	<div class="col m6">
+		<div class="card horizontal combo z-depth-5">
+			<div class="slider card-slider">
+				<ul class="slides">
+					<li>
+						<img class="responsive-img" src="/images/background.jpg" alt="" />
+					</li>
+					<li>
+						<img src="/images/background2.jpg" alt="" />
+					</li>
+				</ul>
+			</div>
+			<div class="card-stacked">
+				<div class="card-content combo-content">
+					<h3>Combo Pioneer</h3>
+					<hr class="post-title" />
+					<p class="product-desc"> Esta es la descripcion del combo, tiene que tener todos los productos descritos con un buen speach.</p>
+					<span class="price-green">$399.990</span>
+				</div>
+				<div class="card-action">
+					<a class=" z-depth-5 combo-btn waves-effect waves-light btn combo-action">Mas Detalles</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col m6">
+		<div class="card horizontal combo z-depth-5">
+			<div class="slider card-slider">
+				<ul class="slides">
+					<li>
+						<img class="responsive-img" src="/images/background.jpg" alt="" />
+					</li>
+					<li>
+						<img src="/images/background2.jpg" alt="" />
+					</li>
+				</ul>
+			</div>
+			<div class="card-stacked">
+				<div class="card-content combo-content">
+					<h3>Combo Pioneer</h3>
+					<hr class="post-title" />
+					<p class="product-desc"> Esta es la descripcion del combo, tiene que tener todos los productos descritos con un buen speach.</p>
+					<span class="price-green">$399.990</span>
+				</div>
+				<div class="card-action">
+					<a class=" z-depth-5 combo-btn waves-effect waves-light btn combo-action">Mas Detalles</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col m6">
+		<div class="card horizontal combo z-depth-5">
+			<div class="slider card-slider">
+				<ul class="slides">
+					<li>
+						<img class="responsive-img" src="/images/background.jpg" alt="" />
+					</li>
+					<li>
+						<img src="/images/background2.jpg" alt="" />
+					</li>
+					<li>
+						<img class="responsive-img" src="/images/background.jpg" alt="" />
+					</li>
+					<li>
+						<img src="/images/background2.jpg" alt="" />
+					</li>
+					<li>
+						<img class="responsive-img" src="/images/background.jpg" alt="" />
+					</li>
+					<li>
+						<img src="/images/background2.jpg" alt="" />
+					</li>
+				</ul>
+			</div>
+			<div class="card-stacked">
+				<div class="card-content combo-content">
+					<h3>Combo Pioneer</h3>
+					<hr class="post-title" />
+					<p class="product-desc"> Esta es la descripcion del combo, tiene que tener todos los productos descritos con un buen speach.</p>
+					<span class="price-green">$399.990</span>
+				</div>
+				<div class="card-action">
+					<a class=" z-depth-5 combo-btn waves-effect waves-light btn combo-action">Mas Detalles</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col m6">
+		<div class="card horizontal combo z-depth-5">
+			<div class="slider card-slider">
+				<ul class="slides">
+					<li>
+						<img class="responsive-img" src="/images/background.jpg" alt="" />
+					</li>
+					<li>
+						<img src="/images/background2.jpg" alt="" />
+					</li>
+				</ul>
+			</div>
+			<div class="card-stacked">
+				<div class="card-content combo-content">
+					<h3>Combo Pioneer</h3>
+					<hr class="post-title" />
+					<p class="product-desc"> Esta es la descripcion del combo, tiene que tener todos los productos descritos con un buen speach.</p>
+					<span class="price-green">$399.990</span>
+				</div>
+				<div class="card-action">
+					<a class=" z-depth-5 combo-btn waves-effect waves-light btn combo-action">Mas Detalles</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+
+<!-- Carta Producto -->
+
+
+<div class="row">
+	<div class="col m4">
+		<div class="card">
+			<div class="card-image">
+				<div class="carousel carousel-slider center">
+					<div class="carousel-item white-text" href="#one!">
+						<img class="responsive-img" src="/images/background.jpg" alt="" />
+					</div>
+					<div class="carousel-item white-text" href="#two!">
+						<img class="responsive-img" src="/images/background2.jpg" alt="" />
+					</div>
+					<div class="carousel-item white-text" href="#three!">
+						<img class="responsive-img" src="/images/background.jpg" alt="" />
+					</div>
+					<div class="carousel-item white-text" href="#four!">
+						<img class="responsive-img" src="/images/background2.jpg" alt="" />
+					</div>
+				</div>
+				<!-- <img src="/images/background.jpg"> -->
+				<a class="btn-floating halfway-fab waves-effect waves-light ir-detalles z-depth-5"><i class="material-icons detalles">add</i></a>
+			</div>
+
+			<div class="card-content card-content-product">
+				<h3 class="card-title">Alarma Hawk anticlonacion</h3>
+				<p class="product-desc">Descripcion del producto</p>
+				<div class="price-container">
+					<span class="price-normal">$69.990</span>
+					<span class="price-offer">$49.990</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 {% endblock %}
 
 {% block scripts %}
