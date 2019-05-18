@@ -13,6 +13,20 @@
 	crossorigin="anonymous"
 	/>
 	<link rel="stylesheet" type="text/css" href="/css/slider.css">
+	<style>
+		.indicators{ visibility: hidden; }
+		.middle-indicator{ position:absolute; top:50%; }
+  		.middle-indicator-text { font-size: 4.2rem; }
+  		a.middle-indicator-text{ color:white !important; }
+  		.content-indicator{ 
+			width: 64px;
+			height: 64px;
+			background: none;
+			-moz-border-radius: 50px;
+			-webkit-border-radius: 50px;
+			border-radius: 50px; 
+		}
+	</style>
 	{% block styles %}
 	{% endblock %}
 </head>
@@ -103,7 +117,7 @@
 		<button id="next"><i class="fas fa-arrow-right"></i></button>
 	</div>
 
-	<div style="height: 300vh; max-width: 1200px; margin: auto;">
+	<div style="max-width: 1200px; margin: auto; position: relative;">
 
 		{% block content %}
 		{% endblock %}
@@ -118,15 +132,27 @@
 			$(".sidenav").sidenav()
 
 			$(window).scroll(function(){
-
 				if($(window).scrollTop()>150){
-					$('nav').css({ background: 'red', transition : 'background .3s ease-in-out'});
+					$('nav').css({ background: 'red', transition : 'background .3s ease-in-out'})
 				}else{
-					$('nav').css({ background: 'rgba(0,0,0,0.3)', transition: 'background .3s ease-in-out'});
+					$('nav').css({ background: 'rgba(0,0,0,0.3)', transition: 'background .3s ease-in-out'})
 				}
-
-			});
+			})
 		})
+
+		$('.moveNextCarousel').click(function(e){
+			e.preventDefault()
+			e.stopPropagation()
+			$(this).closest('.carousel').carousel('next')
+		})
+
+		$('.movePrevCarousel').click(function(e){
+			e.preventDefault()
+			e.stopPropagation()
+			$(this).closest('.carousel').carousel('next')
+		})
+
+    	$('.materialboxed').materialbox()
 	</script>
 	{% block scripts %}
 	{% endblock %}
