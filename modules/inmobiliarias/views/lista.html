@@ -1,0 +1,71 @@
+{% extends '../../template.html' %}
+{% block styles %}
+<style>
+.card-info, .card__meta a {
+    display: inline-flex;
+    vertical-align: middle;
+    line-height: 2;
+    font-size: 1rem;
+}
+.card__meta i.small {
+    font-size: 1.5rem;
+}
+.card .card-content .card-title {
+    line-height: 34px;
+}
+</style>
+{% endblock %}
+{% block content %}
+
+<div style="padding-top: 64px">
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <h4>Inmobiliarias</h4>
+            <div class="row">
+                <div class="col s12 m6 l3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img class="responsive-img" src="/images/inmobiliarias/inmo1.jpg" alt="" />
+                        </div>
+                        <div class="card-content white-text">
+                            <div class="card__date">
+                                <span class="card__date__day">23</span>
+                                <span class="card__date__month">Mai</span>
+                            </div>
+                            <div class="card__meta">
+                                <a href="#"><i class="small material-icons">room</i>Web Design</a>
+                                <time>17th March</time>
+                            </div>
+                            <span class="card-title grey-text text-darken-4">Savoy swing up</span>
+                        </div>
+                        <div class="card-action">
+                            <a href="#"><i class="material-icons">&nbsp;language</i>Ver propiedades</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img class="responsive-img" src="/images/inmobiliarias/inmo2.jpg" alt="" />
+                        </div>
+                        <div class="card-content white-text">
+                            <div class="card__date">
+                                <span class="card__date__day">23</span>
+                                <span class="card__date__month">Mai</span>
+                            </div>
+                            <div class="card__meta">
+                                <a href="#"><i class="small material-icons">room</i>Web Design</a>
+                                <time>17th March</time>
+                            </div>
+                            <span class="card-title grey-text text-darken-4">Savoy swing up</span>
+                        </div>
+                        <div class="card-action">
+                            <a href="#"><i class="material-icons">&nbsp;language</i>Ver propiedades</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
