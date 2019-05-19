@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<style type="text/css">
+	.collapsible-body { padding: 1.5rem !important; }
+</style>
+
 <div class="slider">
 	{% for s in slider %}
 	{% if loop.first %}
@@ -24,34 +28,110 @@
 
 <div style="max-width: 1200px; margin: auto; position: relative;">
 	<div class="row" style="padding: 30px 20px;">
-		<div class="col m3 s12 hide-on-small-only" >
-
-		</div>
-		<div class="col m9 s12 hide-on-small-only" style="display: flex; flex-direction: row; justify-content: space-between;">
+		<div class="col m3 l3 hide-on-small-only" ></div>
+		<div class="col m9 l9 s12 hide-on-small-only valign-wrapper" style="display: flex; flex-direction: row; justify-content: space-between;">
 			<div>
-				Ordenar por
+				<div class="input-field col s12">
+				    <select>
+						<option value="" disabled selected>Elige una opcion</option>
+						<option value="1">Menor precio</option>
+						<option value="2">Mayor precio</option>
+						<option value="3">Recien publicados</option>
+				    </select>
+	    			<label>Ordenar por</label>
+  				</div>
 			</div>
 			<div>
 				<a href="#"><i class="medium material-icons" style="color: black; font-size: 36px;">view_list</i></a>
 				<a href="#"><i class="medium material-icons" style="color: black; font-size: 36px;">view_module</i></a>
 			</div>
 		</div>
-		<div class="col m3 s12" style="margin-top: 7px;">
-			<h6 style="letter-spacing: .06em; margin-bottom: 18px;">Categorias</h6>
-			<p>
-				<label>
-					<input type="checkbox" />
-					<span style="color: black;">Alquiler</span>
-				</label>
-			</p>
-			<p>
-				<label>
-					<input type="checkbox" />
-					<span style="color: black;">En venta</span>
-				</label>
-			</p>
+		<div class="col m3 l3 s12" style="margin-top: 7px;">
+			<ul class="collapsible">
+				<li class="active">
+		      		<div class="collapsible-header"><i class="material-icons">filter_drama</i>Categorias</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox" />
+								<span style="color: black;">Alquiler</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span style="color: black;">En venta</span>
+							</label>
+						</p>
+		      		</div>
+	    		</li>
+		    	<li>
+		      		<div class="collapsible-header"><i class="material-icons">place</i>Ubicacion</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox" />
+								<span style="color: black;">San Nicolas</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span style="color: black;">La Emilia</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span style="color: black;">Campos Salles</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span style="color: black;">General Rojo</span>
+							</label>
+						</p>
+		      		</div>
+		    	</li>
+	    		<li>
+		      		<div class="collapsible-header"><i class="material-icons">whatshot</i>Tipo de propiedad</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox">
+								<span style="color: black;">Terrenos (43)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span style="color: black;">Casa (36)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span style="color: black;">Departamento (33)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span style="color: black;">Local (5)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span style="color: black;">Campo (4)</span>
+							</label>
+						</p>
+		      		</div>
+		    	</li>
+		  	</ul>
 		</div>
-		<div class="col m9 s12">
+		<div class="col m9 l9 s12">
 			<div class="row">
 				{% for a in alquileres %}
 				<div class="col m12 s12">
@@ -78,18 +158,22 @@
 									<p style="padding: 0 0 10px 0; font-weight: bold !important;">{{ a.titulo }}</p>
 									<p class="product-desc">12.000 m² cubiertos</p>
 									<div class="price-container">
-										<span class="price-normal">{{ a.precio }}</span>
 										<p class="price-offer">{{ a.descripcion }}</p>
 									</div>					
 								</div>
-									
 							</div>
 						</div>
-								
 						</div>
-						<div class="card-action" style="text-align: right;">
-								<a class="red waves-effect waves-light btn-small">Contactar</a>
-							</div>	
+						<div class="row">
+							<div class="card-action valign-wrapper">							
+								<div class="col m5 l5 s12">
+									<span style="font-weight: bold; font-size: 1.3em;">{{ a.precio }}</span>
+								</div>
+								<div class="col m7 l7 s12" style="text-align: right;">
+									<div><a class="red waves-effect waves-light btn-small">Contactar</a></div>
+								</div>
+							</div>
+						</div>	
 					</div>
 				</div>
 				{% endfor %}
@@ -127,6 +211,7 @@
 		$(this).closest('.carousel').carousel('next')
 	})
 
-	$('.materialboxed').materialbox()
+	$('select').formSelect();
+	$('.collapsible').collapsible();
 </script>
 {% endblock %}
