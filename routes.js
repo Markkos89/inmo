@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
 				{ path: 'background.jpg'},
 				{ path: 'background2.jpg'},
 			],
-			descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
+			descripcion: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit hic maxime, voluptatibus labore doloremque vero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
 		},
 		{ 
 			titulo: 'Alquiler Terreno', 
@@ -51,7 +51,7 @@ router.get('/', (req, res) => {
 				{ path: 'background.jpg'},
 				{ path: 'background2.jpg'},
 			],
-			descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
+			descripcion: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit hic maxime, voluptatibus labore doloremque vero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
 		},
 		{ 
 			titulo: 'Otro alquiler', 
@@ -62,7 +62,7 @@ router.get('/', (req, res) => {
 				{ path: 'background.jpg'},
 				{ path: 'background2.jpg'},
 			],
-			descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
+			descripcion: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit hic maxime, voluptatibus labore doloremque vero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
 		},
 		{ 
 			titulo: 'Otra Venta', 
@@ -73,7 +73,7 @@ router.get('/', (req, res) => {
 				{ path: 'background.jpg'},
 				{ path: 'background2.jpg'},
 			],
-			descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
+			descripcion: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit hic maxime, voluptatibus labore doloremque vero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
 		}
 	]
 	res.render('index', {
