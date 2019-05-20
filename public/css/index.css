@@ -1,5 +1,4 @@
 #alquileresContainer {
-	max-width: 1200px;
 	margin: auto;
 	position: relative;
 }
@@ -12,16 +11,17 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	padding-bottom: 10px;
 }
 
-#alquileresOrden .iconos {
-	color: black;
-	font-size: 36px;
+.modal.bottom-sheet {
+	max-height: 55%;
 }
 
 .alquilerCard { 
 	border-top: 4px solid red;
 	background: #fbfeff;
+	margin-top: 0;
 }
 
 .carouselCard { position: relative; }
@@ -62,10 +62,17 @@ span.negro { color: black; }
 		right: 0px;
 		bottom: -25px;
 	}
+
+	.textos {
+		padding: 30px !important;
+	}
 }
 
+.dropdown-content li>span { color: red; }
+.select-wrapper+label { font-size: 1.1rem; }
+
 .collapsible { margin-top: 0; }
-.collapsible-body { padding: 1.5rem !important; }
+.collapsible-body { padding: 1.5rem !important; background: #eee; }
 
 .backActive { background: red; transition: background .3s ease-in-out; }
 .backInactive { background: rgba(0,0,0,0.3); transition: background .3s ease-in-out; }

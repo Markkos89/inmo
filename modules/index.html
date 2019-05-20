@@ -28,10 +28,9 @@
 
 <div id="alquileresContainer">
 	<div class="row orden">
-		<div class="col m3 l3 hide-on-small-only" ></div>
-		<div class="col m9 l9 s12 hide-on-small-only valign-wrapper" id="alquileresOrden">
+		<div class="col m9 l9 offset-m3 offset-l3 s12 valign-wrapper" id="alquileresOrden">
 			<div>
-				<div class="input-field col s12">
+				<div class="input-field col s12" style="margin-bottom: 0;">
 				    <select>
 						<option value="" disabled selected>Elige una opcion</option>
 						<option value="1">Menor precio</option>
@@ -42,11 +41,7 @@
   				</div>
 			</div>
 			<div>
-				Mostrando 4 de 50 publicaciones
-			</div>
-			<div>
-				<a href="#"><i class="medium material-icons iconos">view_list</i></a>
-				<a href="#"><i class="medium material-icons iconos">view_module</i></a>
+				Mostrando {{ alquileres.length }} de {{ alquileres.length }} publicaciones
 			</div>
 		</div>
 		<div class="col m3 l3 s12">
@@ -132,17 +127,166 @@
 						</p>
 		      		</div>
 		    	</li>
+		    	<li class="active">
+		      		<div class="collapsible-header"><i class="material-icons">filter_drama</i>Categorias</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">Alquiler (23)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">En venta (15)</span>
+							</label>
+						</p>
+		      		</div>
+	    		</li>
+		    	<li>
+		      		<div class="collapsible-header"><i class="material-icons">place</i>Ubicacion</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">San Nicolas (23)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">La Emilia (1)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">Campos Salles (3)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">General Rojo (5)</span>
+							</label>
+						</p>
+		      		</div>
+		    	</li>
+	    		<li>
+		      		<div class="collapsible-header"><i class="material-icons">whatshot</i>Tipo de propiedad</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox">
+								<span class="negro">Terrenos (43)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span class="negro">Casa (36)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span class="negro">Departamento (33)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span class="negro">Local (5)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span class="negro">Campo (4)</span>
+							</label>
+						</p>
+		      		</div>
+		    	</li>
+		    	<li class="active">
+		      		<div class="collapsible-header"><i class="material-icons">filter_drama</i>Categorias</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">Alquiler (23)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">En venta (15)</span>
+							</label>
+						</p>
+		      		</div>
+	    		</li>
+		    	<li>
+		      		<div class="collapsible-header"><i class="material-icons">place</i>Ubicacion</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">San Nicolas (23)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">La Emilia (1)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">Campos Salles (3)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span class="negro">General Rojo (5)</span>
+							</label>
+						</p>
+		      		</div>
+		    	</li>
+	    		<li>
+		      		<div class="collapsible-header"><i class="material-icons">whatshot</i>Tipo de propiedad</div>
+		      		<div class="collapsible-body">
+		      			<p>
+							<label>
+								<input type="checkbox">
+								<span class="negro">Terrenos (43)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span class="negro">Casa (36)</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox">
+								<span class="negro">Departamento (33)</span>
+							</label>
+						</p>
+		      		</div>
+		    	</li>
 		  	</ul>
-		  	<div class="show-on-small hide-on-med-and-up" id="totalPublicaciones">Mostrando 4 de 50 publicaciones</div>
 		</div>
 		<div class="col m9 l9 s12">
+		{% for a in alquileres %}
 			<div class="row">
-				{% for a in alquileres %}
-				<div class="col m12 s12">
-					<div class="card alquilerCard">
-						<div class="row">
-							<div class="card-image">
-								<div class="col m5 s12 cardContent">							
+				<div class="card alquilerCard">
+					<div class="card-content" style="padding: 0;">
+						<div class="row" style="margin-bottom: 0; position: relative;">
+							<div class="col m5 l5 s12 cardContent">
+								<div class="card-image">	
 									<div class="carousel carousel-slider center carouselCard" data-indicators="true">
 										<div class="left izquierda">
 											<a href="Previo" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
@@ -157,37 +301,33 @@
 										{% endfor %}
 									</div>
 									<a href="#modal1" class="modal-trigger btn-floating btn-large waves-effect waves-light red plusButton"><i class="material-icons">add</i></a>	
-							</div>
-							<div class="col m7 s12">
-								<div class="card-content">
-									<p class="tituloCard">{{ a.titulo }}</p>
-									<p class="product-desc">12.000 m² cubiertos</p>
-									<div class="price-container">
-										<p class="price-offer">{{ a.descripcion }}</p>
-									</div>		
 								</div>
 							</div>
+							<div class="col m7 s12 textos" style="padding: 10px;">
+								<p class="tituloCard">{{ a.titulo }}</p>
+								<p class="product-desc">12.000 m² cubiertos</p>
+								<div class="price-container" style="margin-top: 4px;">
+									<p class="price-offer" style="font-size: 16px;">{{ a.descripcion }}</p>
+								</div>
+							</div>
+							<div style="position: absolute; bottom: 0; right: 20px; font-size: 14px;">Publicado hace 4 dias</div>
 						</div>
+					</div>
+					<div class="card-action valign-wrapper">
+						<div class="col m5 l5 s12">
+							<span class="precioCard">{{ a.precio }}</span>
 						</div>
-						<div class="row">
-							<div class="card-action valign-wrapper">							
-								<div class="col m5 l5 s12">
-									<span class="precioCard">{{ a.precio }}</span>
-								</div>
-								<div class="col m7 l7 s12 botonCard">
-									<div><a href="#modal2" class="modal-trigger red waves-effect waves-light btn-small">Contactar</a></div>
-								</div>
-							</div>
-						</div>	
+						<div class="col m7 l7 s12 botonCard">
+							<div><a href="#modal2" class="modal-trigger red waves-effect waves-light btn-small">Contactar</a></div>
+						</div>
 					</div>
 				</div>
-				{% endfor %}
 			</div>
+		{% endfor %}
 		</div>
 	</div>
 </div>
 
-<!-- Modal Structure -->
 <div id="modal1" class="modal bottom-sheet">
 	<div class="modal-content">
 		<div class="preloader-wrapper active">
@@ -278,22 +418,34 @@
 
 	$('select').formSelect();
 	$('.collapsible').collapsible();
-	$('.modal').modal();
+	$('.modal').modal({
+		dismissible: false,
+		onOpenStart: function() {
+			$("input, textarea").val("").removeClass('valid').removeClass('invalid')
+		}
+	});
 	$('textarea#mensaje').characterCounter();
 
 	$("#btnEnviar").click(() => {
 		$('.toast').hide()
-		let toastHTML = '<span>Debe completar todos los campos</span>'
-  		M.toast({html: toastHTML})
-	})
+		let nombre = $("#nombre").val()
+		let apellido = $("#apellido").val()
+		let telefono = $("#telefono").val()
+		let email = $("#email").val()
+		let mensaje = $("#mensaje").val()
 
-	document.addEventListener("DOMContentLoaded", function(){
-		$('.preloader-background').delay(3700).fadeOut('slow');
-		
-		$('.preloader-wrapper')
-			.delay(3700)
-			.fadeOut('slow');
-	});
+		if (nombre && apellido && telefono && email && mensaje) {
+			$('.modal').modal('close')
+			Swal.fire({
+				type: "success",
+				title: "Exito",
+				text: "Mensaje enviado correctamente"
+			})
+		} else {
+			let toastHTML = '<span>Debe completar todos los campos</span>'
+	  		M.toast({html: toastHTML})			
+		}
+	})
 
 </script>
 {% endblock %}
