@@ -1,0 +1,29 @@
+.indicators{ visibility: hidden; }
+.middle-indicator{ position:absolute; top:50%; }
+.middle-indicator-text { font-size: 4.2rem; }
+a.middle-indicator-text{ color:white !important; }
+.content-indicator{ 
+	width: 64px;
+	height: 64px;
+	background: none;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px; 
+}
+body { font-family: 'Pathway Gothic One', sans-serif; font-size: 1.3rem !important; }
+.nav-wrapper { font-family: 'Amatic SC', cursive; }
+.nav-wrapper a { font-size: 1.8rem !important; }
+
+.preloader-background {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #eee;
+	
+	position: fixed;
+	z-index: 1001;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;	
+}

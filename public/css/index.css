@@ -1,0 +1,71 @@
+#alquileresContainer {
+	max-width: 1200px;
+	margin: auto;
+	position: relative;
+}
+
+#alquileresContainer .row.orden {
+	padding: 30px 20px;
+}
+
+#alquileresOrden {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#alquileresOrden .iconos {
+	color: black;
+	font-size: 36px;
+}
+
+.alquilerCard { 
+	border-top: 4px solid red;
+	background: #fbfeff;
+}
+
+.carouselCard { position: relative; }
+.carouselCard .derecha, .carouselCard .izquierda {
+	position: absolute !important;
+	top: 40% !important;
+}
+.carouselCard .derecha { right: 0 !important; }
+
+.tituloCard {
+	padding: 0 0 10px 0;
+	font-weight: bold !important;
+}
+
+span.precioCard {
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.botonCard { text-align: right; }
+
+span.negro { color: black; }
+
+#totalPublicaciones { text-align: center; }
+
+.cardContent { position: relative; }
+.cardContent .plusButton { 
+	position: absolute;
+	right: -18px;
+	bottom: -25px;
+}
+
+.toast { background: red; }
+
+@media only screen and (max-width: 600px) {
+	.cardContent .plusButton { 
+		position: absolute;
+		right: 0px;
+		bottom: -25px;
+	}
+}
+
+.collapsible { margin-top: 0; }
+.collapsible-body { padding: 1.5rem !important; }
+
+.backActive { background: red; transition: background .3s ease-in-out; }
+.backInactive { background: rgba(0,0,0,0.3); transition: background .3s ease-in-out; }
