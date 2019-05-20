@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<style type="text/css">
-	.collapsible-body { padding: 1.5rem !important; }
-</style>
+{% block styles %}
+	<link rel="stylesheet" type="text/css" href="/css/index.css">
+{% endblock %}
 
 <div class="slider">
 	{% for s in slider %}
@@ -26,10 +26,10 @@
 	<button id="next"><i class="fas fa-arrow-right"></i></button>
 </div>
 
-<div style="max-width: 1200px; margin: auto; position: relative;">
-	<div class="row" style="padding: 30px 20px;">
+<div id="alquileresContainer">
+	<div class="row orden">
 		<div class="col m3 l3 hide-on-small-only" ></div>
-		<div class="col m9 l9 s12 hide-on-small-only valign-wrapper" style="display: flex; flex-direction: row; justify-content: space-between;">
+		<div class="col m9 l9 s12 hide-on-small-only valign-wrapper" id="alquileresOrden">
 			<div>
 				<div class="input-field col s12">
 				    <select>
@@ -42,11 +42,14 @@
   				</div>
 			</div>
 			<div>
-				<a href="#"><i class="medium material-icons" style="color: black; font-size: 36px;">view_list</i></a>
-				<a href="#"><i class="medium material-icons" style="color: black; font-size: 36px;">view_module</i></a>
+				Mostrando 4 de 50 publicaciones
+			</div>
+			<div>
+				<a href="#"><i class="medium material-icons iconos">view_list</i></a>
+				<a href="#"><i class="medium material-icons iconos">view_module</i></a>
 			</div>
 		</div>
-		<div class="col m3 l3 s12" style="margin-top: 7px;">
+		<div class="col m3 l3 s12">
 			<ul class="collapsible">
 				<li class="active">
 		      		<div class="collapsible-header"><i class="material-icons">filter_drama</i>Categorias</div>
@@ -54,13 +57,13 @@
 		      			<p>
 							<label>
 								<input type="checkbox" />
-								<span style="color: black;">Alquiler</span>
+								<span class="negro">Alquiler (23)</span>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" />
-								<span style="color: black;">En venta</span>
+								<span class="negro">En venta (15)</span>
 							</label>
 						</p>
 		      		</div>
@@ -71,25 +74,25 @@
 		      			<p>
 							<label>
 								<input type="checkbox" />
-								<span style="color: black;">San Nicolas</span>
+								<span class="negro">San Nicolas (23)</span>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" />
-								<span style="color: black;">La Emilia</span>
+								<span class="negro">La Emilia (1)</span>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" />
-								<span style="color: black;">Campos Salles</span>
+								<span class="negro">Campos Salles (3)</span>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" />
-								<span style="color: black;">General Rojo</span>
+								<span class="negro">General Rojo (5)</span>
 							</label>
 						</p>
 		      		</div>
@@ -100,50 +103,51 @@
 		      			<p>
 							<label>
 								<input type="checkbox">
-								<span style="color: black;">Terrenos (43)</span>
+								<span class="negro">Terrenos (43)</span>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox">
-								<span style="color: black;">Casa (36)</span>
+								<span class="negro">Casa (36)</span>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox">
-								<span style="color: black;">Departamento (33)</span>
+								<span class="negro">Departamento (33)</span>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox">
-								<span style="color: black;">Local (5)</span>
+								<span class="negro">Local (5)</span>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox">
-								<span style="color: black;">Campo (4)</span>
+								<span class="negro">Campo (4)</span>
 							</label>
 						</p>
 		      		</div>
 		    	</li>
 		  	</ul>
+		  	<div class="show-on-small hide-on-med-and-up" id="totalPublicaciones">Mostrando 4 de 50 publicaciones</div>
 		</div>
 		<div class="col m9 l9 s12">
 			<div class="row">
 				{% for a in alquileres %}
 				<div class="col m12 s12">
-					<div class="card" style="border-top: 4px solid red; background: #fbfeff;">
+					<div class="card alquilerCard">
 						<div class="row">
 							<div class="card-image">
-								<div class="col m5 s12">							
-									<div class="carousel carousel-slider center" style="position: relative" data-indicators="true">
-										<div class="left" style="position: absolute; top: 40%;">
+								<div class="col m5 s12 cardContent">							
+									<div class="carousel carousel-slider center carouselCard" data-indicators="true">
+										<div class="left izquierda">
 											<a href="Previo" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
 										</div>
-										<div class="right" style="position: absolute; top: 40%; right: 0;">
+										<div class="right derecha">
 											<a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
 										</div>
 										{% for f in a.fotos%}
@@ -152,14 +156,15 @@
 										</div>
 										{% endfor %}
 									</div>
+									<a href="#modal1" class="modal-trigger btn-floating btn-large waves-effect waves-light red plusButton"><i class="material-icons">add</i></a>	
 							</div>
 							<div class="col m7 s12">
 								<div class="card-content">
-									<p style="padding: 0 0 10px 0; font-weight: bold !important;">{{ a.titulo }}</p>
+									<p class="tituloCard">{{ a.titulo }}</p>
 									<p class="product-desc">12.000 m² cubiertos</p>
 									<div class="price-container">
 										<p class="price-offer">{{ a.descripcion }}</p>
-									</div>					
+									</div>		
 								</div>
 							</div>
 						</div>
@@ -167,10 +172,10 @@
 						<div class="row">
 							<div class="card-action valign-wrapper">							
 								<div class="col m5 l5 s12">
-									<span style="font-weight: bold; font-size: 1.3em;">{{ a.precio }}</span>
+									<span class="precioCard">{{ a.precio }}</span>
 								</div>
-								<div class="col m7 l7 s12" style="text-align: right;">
-									<div><a class="red waves-effect waves-light btn-small">Contactar</a></div>
+								<div class="col m7 l7 s12 botonCard">
+									<div><a href="#modal2" class="modal-trigger red waves-effect waves-light btn-small">Contactar</a></div>
 								</div>
 							</div>
 						</div>	
@@ -179,6 +184,66 @@
 				{% endfor %}
 			</div>
 		</div>
+	</div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet">
+	<div class="modal-content">
+		<div class="preloader-wrapper active">
+			<div class="spinner-layer spinner-red-only">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div>
+				<div class="gap-patch">
+					<div class="circle"></div>
+				</div>
+				<div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+		</div>
+		<h4>Modal Header</h4>
+		<p>A bunch of text</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+	</div>
+</div>
+
+<div id="modal2" class="modal bottom-sheet modal-fixed-footer">
+	<div class="modal-content">
+		<h4>Complete el formulario</h4>
+		<div class="row">
+    		<form class="col s12">
+		      	<div class="row">
+		        	<div class="input-field col m3 l3 s6">
+		          		<input id="nombre" type="text" class="validate">
+		          		<label for="nombre">Nombre</label>
+	        		</div>
+		        	<div class="input-field col m3 l3 s6">
+		          		<input id="apellido" type="text" class="validate">
+		          		<label for="apellido">Apellido</label>
+	        		</div>
+	        		<div class="input-field col m3 l3 s6">
+		          		<input id="telefono" type="text" class="validate">
+		          		<label for="telefono">Telefono</label>
+	        		</div>
+			        <div class="input-field col m3 l3 s6">
+			            <input id="email" type="email" class="validate">
+			            <label for="email">Email</label>
+			        </div>
+			        <div class="input-field col s12">
+            			<textarea id="mensaje" class="materialize-textarea" data-length="120"></textarea>
+            			<label for="mensaje">Mensaje</label>
+          			</div>
+		      	</div>
+    		</form>
+  		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+		<a href="#!" class="waves-effect waves-green btn-flat red white-text" id="btnEnviar">Enviar</a>
 	</div>
 </div>
 
@@ -192,9 +257,9 @@
 
 		$(window).scroll(function(){
 			if($(window).scrollTop()>150){
-				$('nav').css({ background: 'red', transition : 'background .3s ease-in-out'})
+				$('nav').addClass("backActive").removeClass("backInactive")
 			}else{
-				$('nav').css({ background: 'rgba(0,0,0,0.3)', transition: 'background .3s ease-in-out'})
+				$('nav').addClass("backInactive").removeClass("backActive")
 			}
 		})
 	})
@@ -213,5 +278,22 @@
 
 	$('select').formSelect();
 	$('.collapsible').collapsible();
+	$('.modal').modal();
+	$('textarea#mensaje').characterCounter();
+
+	$("#btnEnviar").click(() => {
+		$('.toast').hide()
+		let toastHTML = '<span>Debe completar todos los campos</span>'
+  		M.toast({html: toastHTML})
+	})
+
+	document.addEventListener("DOMContentLoaded", function(){
+		$('.preloader-background').delay(3700).fadeOut('slow');
+		
+		$('.preloader-wrapper')
+			.delay(3700)
+			.fadeOut('slow');
+	});
+
 </script>
 {% endblock %}

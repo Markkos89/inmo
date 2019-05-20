@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
 	]
 	const alquileres = [
 		{ 
+			id: 1,
 			titulo: 'Venta Terreno Comercial en Loteo Colonial', 
 			precio: '$69.990',
 			fotos: [
@@ -43,6 +44,7 @@ router.get('/', (req, res) => {
 			descripcion: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit hic maxime, voluptatibus labore doloremque vero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
 		},
 		{ 
+			id: 2,
 			titulo: 'Alquiler Terreno', 
 			precio: '$69.990',
 			fotos: [
@@ -54,6 +56,7 @@ router.get('/', (req, res) => {
 			descripcion: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit hic maxime, voluptatibus labore doloremque vero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
 		},
 		{ 
+			id: 3,
 			titulo: 'Otro alquiler', 
 			precio: '$69.990',
 			fotos: [
@@ -65,6 +68,7 @@ router.get('/', (req, res) => {
 			descripcion: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit hic maxime, voluptatibus labore doloremque vero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo, maxime, assumenda.'
 		},
 		{ 
+			id: 4,
 			titulo: 'Otra Venta', 
 			precio: '$69.990',
 			fotos: [
