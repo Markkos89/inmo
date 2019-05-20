@@ -11,7 +11,7 @@ a.middle-indicator-text{ color:white !important; }
 	border-radius: 50px; 
 }
 body { font-family: 'Pathway Gothic One', sans-serif; font-size: 1.3rem !important; }
-.nav-wrapper { font-family: 'Amatic SC', cursive; }
+.nav-wrapper { font-family: 'Amatic SC', cursive; padding: 0 20px; }
 .nav-wrapper a { font-size: 1.8rem !important; }
 
 .preloader-background {
@@ -26,4 +26,13 @@ body { font-family: 'Pathway Gothic One', sans-serif; font-size: 1.3rem !importa
 	left: 0;
 	right: 0;
 	bottom: 0;	
+}
+
+#navbarItems li:hover {
+	border-bottom: 2px solid white;
+}
+
+#navbarItems li a {
+	font-family: 'Pathway Gothic One', sans-serif;
+	font-size: 20px !important;
 }
