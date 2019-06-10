@@ -48,18 +48,22 @@
 
 			<ul class="right hide-on-med-and-down" id="navbarItems">
 				<li><a href="/">Inicio</a></li>
+				{% if !login %}
 				<li><a href="/Inmobiliarias">Inmobiliarias</a></li>
 				<li><a href="#">Contacto</a></li>
-				<li><a href="#">Ingresar</a></li>
+				<li><a href="#modal3" class="modal-trigger waves-effect waves-light">Ingresar</a></li>
+				{% endif %}
 			</ul>
 		</div>
 	</nav>
 
 	<ul class="sidenav" id="mobile-nav">
 		<li><a href="/">Inicio</a></li>
+		{% if !login %}
 		<li><a href="/Inmobiliarias">Inmobiliarias</a></li>
 		<li><a href="#">Contacto</a></li>
-		<li><a href="#">Ingresar</a></li>
+		<li><a href="#modal3" class="modal-trigger waves-effect waves-light">Ingresar</a></li>
+		{% endif %}
 	</ul>
 
 	{% block content %}

@@ -13,9 +13,6 @@
 	{% else %}
 		<div class="slide">
 	{% endif %}
-			<div class="valign-wrapper" style="position: absolute; width: 100%; height: 100%; right: 0; left: 0; margin: 0; text-align: center !important;">
-				InmoVillage
-			</div>
 			<div class="content">
 				<h1>{{ s.titulo }}</h1>
 				<p>{{ s.descripcion }}</p>
@@ -390,6 +387,30 @@
 	</div>
 </div>
 
+<div id="modal3" class="modal bottom-sheet modal-fixed-footer">
+	<div class="modal-content">
+		<h4>Complete el formulario</h4>
+		<div class="row">
+    		<form class="col s12">
+		      	<div class="row">
+		        	<div class="input-field col m3 l3 s6">
+		          		<input id="usuario" type="text" class="validate">
+		          		<label for="usuario">Usuario</label>
+	        		</div>
+		        	<div class="input-field col m3 l3 s6">
+		          		<input id="contraseña" type="password" class="validate">
+		          		<label for="contraseña">Contraseña</label>
+	        		</div>
+		      	</div>
+    		</form>
+  		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+		<a href="#!" class="waves-effect waves-green btn-flat red white-text" id="btnIngresar">Enviar</a>
+	</div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -443,6 +464,28 @@
 				type: "success",
 				title: "Exito",
 				text: "Mensaje enviado correctamente"
+			})
+		} else {
+			let toastHTML = '<span>Debe completar todos los campos</span>'
+	  		M.toast({html: toastHTML})			
+		}
+	})
+
+	$("#btnIngresar").click(() => {
+		$('.toast').hide()
+		let usuario = $("#usuario").val()
+		let contraseña = $("#contraseña").val()
+
+		if (usuario && contraseña) {
+			$('.modal').modal('close')
+			$.post("/Inmobiliarias/Acesso", { usuario, contraseña })
+			.then(data => {
+				console.log(data)
+				Swal.fire({
+					type: "success",
+					title: "Exito",
+					text: "Bienvenido usuario"
+				})				
 			})
 		} else {
 			let toastHTML = '<span>Debe completar todos los campos</span>'
