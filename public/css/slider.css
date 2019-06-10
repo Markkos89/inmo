@@ -1,7 +1,7 @@
 .slider {
   position: relative;
   overflow: hidden !important;
-  height: 100vh;
+  height: 50vh;
   width: 100%;
 }
 
@@ -27,7 +27,7 @@
   width: 500px;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 35px;
+  padding-left: 100px;
 }
 
 .slide .content h1 {
@@ -42,13 +42,13 @@
 
 .buttons button#next {
   position: absolute;
-  top: 40%;
+  top: 25%;
   right: 15px;
 }
 
 .buttons button#prev {
   position: absolute;
-  top: 40%;
+  top: 25%;
   left: 15px;
 }
 
@@ -86,26 +86,33 @@
 .slide:first-child {
   background: url('../images/slider1.jpg') no-repeat
   center top/cover;
+  background-position: 50% 40%;
+  background-position: 50% 40%;
 }
 .slide:nth-child(2) {
   background: url('../images/slider2.jpg') no-repeat
   center top/cover;
+  background-position: 50% 40%;
 }
 .slide:nth-child(3) {
   background: url('../images/slider3.jpg') no-repeat
   center top/cover;
+  background-position: 50% 40%;
 }
 .slide:nth-child(4) {
   background: url('../images/slider4.jpg') no-repeat
   center top/cover;
+  background-position: 50% 40%;
 }
 .slide:nth-child(5) {
   background: url('../images/slider5.jpg') no-repeat
   center top/cover;
+  background-position: 50% 40%;
 } 
 .slide:nth-child(6)  {
   background: url('../images/slider6.jpg') no-repeat
   center center/cover;
+  background-position: 50% 40%;
 }
 
 nav {

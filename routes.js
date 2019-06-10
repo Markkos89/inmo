@@ -86,6 +86,15 @@ router.get('/', (req, res) => {
 	})
 })
 
+router.get('/Admin', (req, res) => {
+	res.render('superuser/views/login', {
+		pagename: 'Login Admin',
+		login: true
+	})
+})
+
 router.get('/Inmobiliarias', cInmobiliarias.getAll)
+
+router.post('/Inmobiliarias/Acesso', cInmobiliarias.postLogin)
 
 module.exports = router
