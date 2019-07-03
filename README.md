@@ -40,7 +40,7 @@ tablas
 .celular
 .mail
 
--usuarios
+- usuarios
 .nombre
 .clave
 .mail
