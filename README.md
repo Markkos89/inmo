@@ -21,27 +21,27 @@ ALTER TABLE `inmobiliarias`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
-tablas
+-- tablas
 
 - post
-.titulo
-.descripcion_corta
-.descripcion_larga
-.precio
-.fecha_creacion
+. titulo
+. descripcion_corta
+. descripcion_larga
+. precio
+. fecha_creacion
 
 - fotos_x_post
-.id_post_fk
-.path
+. id_post_fk
+. path
 
 - inmobiliarias
-.nombre
-.contacto
-.celular
-.mail
+. nombre
+. contacto
+. celular
+. mail
 
 - usuarios
-.nombre
-.clave
-.mail
-.celular
+. nombre
+. clave
+. mail
+. celular
