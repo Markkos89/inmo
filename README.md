@@ -21,6 +21,8 @@ ALTER TABLE `inmobiliarias`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
+RENAME TABLE inmo.inmobiliarias TO inmo.usuarios;
+
 -- tablas
 
 - post
