@@ -32,15 +32,50 @@ RENAME TABLE inmo.inmobiliarias TO inmo.usuarios;
 . precio
 . fecha_creacion
 
+CREATE TABLE inmo.posts (
+	id INT NOT NULL auto_increment primary key,
+	titulo varchar(100) NULL,
+	descripcion varchar(500) NULL,
+	descripcion_corta varchar(100) NULL,
+	precio INT NOT NULL,
+	fecha_creacion DATETIME NOT NULL	
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci;
+
 - fotos_x_post
 . id_post_fk
 . path
+
+CREATE TABLE inmo.fotos_x_posts (
+	id INT NOT NULL auto_increment primary key,
+	id_post_fk  INT null ,
+	path varchar(500) null,
+	foreign key(id_post_fk) references posts(id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci;
+
 
 - inmobiliarias
 . nombre
 . contacto
 . celular
 . mail
+
+CREATE TABLE inmo.inmobiliarias (
+	id INT NOT NULL auto_increment primary key,
+	nombre  VARCHAR(100) null ,
+	contacto varchar(100) null,
+	celular char(15),
+	mail char(50)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci;
+
 
 - usuarios
 . nombre
