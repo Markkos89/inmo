@@ -1,0 +1,84 @@
+{% extends '../../template.html' %}
+
+{% block content %}
+<div style="padding-top: 70px; width: 90vw; margin: auto;">
+	<div style="display: flex; justify-content: space-between; align-items: center;">
+		<h3>Inmobiliarias</h3>
+		<a href="#modalAgregar" class="modal-trigger waves-effect waves-light red btn" id="btnAgregar">Agregar</a>
+	</div>
+	<div id="tabla"></div>
+</div>
+
+<div id="modalAgregar" class="modal bottom-sheet modal-fixed-footer">
+	<div class="modal-content">
+		<h4>Complete el formulario</h4>
+		<div class="row">
+    		<form class="col s12">
+		      	<div class="row">
+		        	<div class="input-field col m3 l3 s6">
+		          		<input id="nombre" type="text" class="validate">
+		          		<label for="nombre">Nombre</label>
+	        		</div>
+		        	<div class="input-field col m3 l3 s6">
+		          		<input id="direccion" type="text" class="validate">
+		          		<label for="direccion">Direccion</label>
+	        		</div>
+	        		<div class="input-field col m3 l3 s6">
+		          		<input id="telefono" type="text" class="validate">
+		          		<label for="telefono">Telefono / Celular</label>
+	        		</div>
+			        <div class="input-field col m3 l3 s6">
+			            <input id="email" type="email" class="validate">
+			            <label for="email">Email</label>
+			        </div>
+		      	</div>
+    		</form>
+  		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+		<a href="#!" class="waves-effect waves-green btn-flat red white-text" id="btnEnviar">Enviar</a>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+	$(function() {
+		CargarTabla()
+	})
+
+	function CargarTabla() {
+		$.ajax({
+	        method: "GET",
+	        url: "/Admin/Inicio/listaajax",
+	        success: function(data) {
+	            let tablecontent = $($.parseHTML(data))
+	            $('#tabla').html(tablecontent)
+	        }
+	    })
+	}
+
+	$('.modal').modal({
+		dismissible: false,
+		onOpenStart: function() {
+			$("input, textarea").val("").removeClass('valid').removeClass('invalid')
+		}
+	});
+
+	$("#btnEnviar").click(async () => {
+		let data = {
+			nombre: $("#nombre").val(),
+			direccion: $("#direccion").val(),
+			celular: $("#telefono").val(),
+			email: $("#email").val()			
+		}
+
+		const resultado = await $.post("/Admin/Inmobiliarias", data)
+		console.log(resultado)
+		CargarTabla()
+		$('.modal').modal('close')
+	})
+</script>
+{% endblock %}
+ 
