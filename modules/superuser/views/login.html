@@ -42,3 +42,31 @@
 	</main>	
 </div>
 {% endblock %}
+
+{% block scripts %}
+<script>
+	$('#btnLogin').click( async () => {
+		let usuario = $("#usuario").val()
+		let contraseña = $("#contraseña").val()
+		
+		if ( !usuario || !contraseña ) return
+
+		let data = {
+			usuario, contraseña 
+		}
+
+		const resultado = await $.post("/Admin/Login", data)
+		console.log(resultado)
+
+		if ( resultado.error ) {
+			Swal.fire({
+				type: "error",
+				title: "Error",
+				text: resultado.error
+			})			
+		} else {
+			window.location = '/Admin/Inicio'			
+		}
+	})
+</script>
+{% endblock %}

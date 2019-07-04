@@ -5,7 +5,7 @@ const local_conn = mysql.createConnection({
     password: "",
     host: "localhost",
     port: "3306",
-    database: "inmovillage",
+    database: "inmovillage", 
     dateStrings : true
 })
 

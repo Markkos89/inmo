@@ -1,0 +1,26 @@
+<table>
+        <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Direccion</th>
+              <th>Mail</th>
+              <th>Celular</th>
+              <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for i in inmobiliarias %}
+          	<tr>
+          		<td>{{ i.nombre }}</td>
+          		<td>{{ i.direccion }}</td>
+          		<td>{{ i.mail }}</td>
+          		<td>{{ i.celular }}</td>
+          		<td>
+          			<a class="waves-effect red waves-light btn" id="btnEditar" data-id="{{ i.id }}">Editar</a>
+					<a class="waves-effect red waves-light btn" id="btnEliminar" data-id="{{ i.id }}">Eliminar</a>
+				</td>
+          	</tr>
+          {% endfor %}
+        </tbody>
+      </table>
