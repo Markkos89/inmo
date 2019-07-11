@@ -1,4 +1,7 @@
-exports.getIndex = (req, res) => {
+const mLocalidades = require("./localidades/mLocalidades")
+
+exports.getIndex = async (req, res) => {
+	const localidades = await mLocalidades.getLocalidades()
 	const slider = [
 		{
 			titulo: 'Slide One',
@@ -77,6 +80,7 @@ exports.getIndex = (req, res) => {
 	]
 	res.render('index', {
 		alquileres,
-		slider
+		slider,
+		localidades
 	})
 }
