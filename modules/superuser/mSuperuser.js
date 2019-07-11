@@ -3,8 +3,8 @@ const db = require('../../config/db').db()
 exports.getUsuario = (obj) => {
     return db.query(`
         select * from usuarios
-        where Usuario = ? and Contraseña = ?
-    `, [ obj.usuario, obj.contraseña ])
+        where Usuario = ? and Clave = ?
+    `, [ obj.usuario, obj.clave ])
 }
 
 exports.getInmobiliarias = () => {

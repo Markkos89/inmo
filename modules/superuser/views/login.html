@@ -47,12 +47,12 @@
 <script>
 	$('#btnLogin').click( async () => {
 		let usuario = $("#user").val()
-		let contraseña = $("#clave").val()
+		let clave = $("#clave").val()
 		
-		if ( !usuario || !contraseña ) return
+		if ( !usuario || !clave ) return
 
 		let data = {
-			usuario, contraseña 
+			usuario, clave 
 		}
 
 		const resultado = await $.post("/Admin/Login", data)
