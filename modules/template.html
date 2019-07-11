@@ -53,7 +53,9 @@
 				<li><a href="#">Contacto</a></li>
 				<li><a href="#modal3" class="modal-trigger waves-effect waves-light">Ingresar</a></li>
 				{% else %}
+				{% if user.rol != "inmobiliaria" %}
 				<li><a href="/Admin/Inicio">Inmobiliarias</a></li>
+				{% endif %}
 				<li><a href="/Admin/Posts">Posts</a></li>
 				<li><a href="/logout" class="modal-trigger waves-effect waves-light">Cerrar Sesion</a></li>
 				{% endif %}
@@ -107,7 +109,7 @@
 			$('.preloader-wrapper')
 				.delay(2000)
 				.fadeOut('slow');
-		});	
+		});
 	</script>
 	{% block scripts %}
 	{% endblock %}
