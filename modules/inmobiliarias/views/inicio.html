@@ -3,7 +3,7 @@
 {% block content %}
 <div style="padding-top: 70px; width: 90vw; margin: auto;">
 	<div style="display: flex; justify-content: space-between; align-items: center;">
-		<h3>Inmobiliarias</h3>
+		<h3>Bienvenido {{ user.usuario }}</h3>
 		<a href="#modalInmo" class="modal-trigger waves-effect waves-light red btn" id="btnAgregar">Agregar</a>
 	</div>
 	<div id="tabla"></div>
@@ -53,84 +53,7 @@
 
 {% block scripts %}
 <script type="text/javascript">
-	$(function() {
-		CargarTabla()
-	})
 
-	function CargarTabla() {
-		$.ajax({
-	        method: "GET",
-	        url: "/Admin/Inicio/listaajax",
-	        success: function(data) {
-	            let tablecontent = $($.parseHTML(data))
-	            $('#tabla').html(tablecontent)
-	        }
-	    })
-	}
-
-	$('.modal').modal({
-		dismissible: false,
-	});
-
-	$("#btnAgregar").click(function() {
-		$("#modalInmo input").val("")
-		$("#accion").val("N")
-	})
-
-	$("#btnEnviar").click(async () => {
-		let data = {
-			nombre: $("#nombre").val(),
-			direccion: $("#direccion").val(),
-			celular: $("#telefono").val(),
-			email: $("#email").val(),
-			accion: $("#accion").val(),
-			id: $("#btnEnviar").attr("data-id"),
-			usuario: $("#user").val(),
-			clave: $("#clave").val()
-		}
-
-		// Swal.fire({
-  //           type: 'warning',
-  //           title: 'Alerta',
-  //           text: bandera,
-  //       })
-
-		const resultado = await $.post("/Admin/Inmobiliarias", data)
-		CargarTabla()
-		$('.modal').modal('close')
-	})
-
-	async function Modificar(id) {
-		const data = await $.getJSON(`/Admin/Inmobiliaria/${id}`)
-		console.log(data)
-		$("#accion").val("M")
-		$("#nombre").val(data[0].nombre).focus()
-		$("#direccion").val(data[0].direccion)
-		$("#telefono").val(data[0].celular)
-		$("#email").val(data[0].mail)
-		$("#user").val(data[0].usuario)
-		$("#clave").val(data[0].clave)
-		$("#modalInmo label").addClass("active")
-		$("#btnEnviar").attr("data-id", id)
-	}
-
-	async function Eliminar(id) {
-		Swal.fire({
-	        title: 'Confirme',
-	        text: "¿Desea eliminar? Si Acepta, el movimiento sera eliminado definitivamente.",
-	        type: 'warning',
-	        showCancelButton: true,
-	        confirmButtonColor: '#3085d6',
-	        cancelButtonColor: '#d33',
-	        cancelButtonText: 'Cancelar',
-	        confirmButtonText: 'Aceptar'
-	    }).then( async (result) => {
-	        if (result.value) {
-	            const resultado = await $.getJSON(`/Admin/Inmobiliaria/Elminar/${id}`)
-	            CargarTabla()
-	        }
-	    })
-	}
 </script>
 {% endblock %}
  

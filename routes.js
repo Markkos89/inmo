@@ -31,11 +31,14 @@ router.get('/logout', logout)
 router.get('/Admin', cSuperuser.getLogin)
 router.post('/Admin/Login', cSuperuser.postLogin)
 router.get('/Admin/Inicio', auth, cSuperuser.getInicio)
-router.post('/Admin/Inmobiliarias', cSuperuser.postInmobiliarias)
 router.get('/Admin/Inicio/listaajax', cSuperuser.listaajax)
+router.post('/Admin/Inmobiliarias', cSuperuser.postInmobiliarias)
+router.get('/Admin/Inmobiliaria/:id', cSuperuser.getModificarInmobiliaria)
+router.get('/Admin/Inmobiliaria/Elminar/:id', cSuperuser.getEliminar)
 
 router.get('/Inmobiliarias', cInmobiliarias.getAll)
 
-router.post('/Inmobiliarias/Acesso', cInmobiliarias.postLogin)
+router.post('/Inmobiliarias/Acceso', cInmobiliarias.postLogin)
+router.get('/Inmobiliarias/Inicio', auth, cInmobiliarias.getInicio)
 
 module.exports = router

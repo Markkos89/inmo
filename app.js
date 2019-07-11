@@ -25,7 +25,7 @@ app.use(session({
 
 app.use( (req, res, next) => {
     if ( req.session.user != undefined && req.session.user != null ) {
-        app.locals.user = req.session.user.Usuario
+        app.locals.user = req.session.user
     } else {
     	app.locals.user = null
     }
