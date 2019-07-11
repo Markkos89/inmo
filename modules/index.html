@@ -62,30 +62,14 @@
 		    	<li>
 		      		<div class="collapsible-header"><i class="material-icons">place</i>Ubicacion</div>
 		      		<div class="collapsible-body">
+		      			{% for l in localidades %}
 		      			<p>
 							<label>
 								<input type="checkbox" />
-								<span class="negro">San Nicolas (23)</span>
+								<span class="negro">{{ l.nombre }}</span>
 							</label>
 						</p>
-						<p>
-							<label>
-								<input type="checkbox" />
-								<span class="negro">La Emilia (1)</span>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" />
-								<span class="negro">Campos Salles (3)</span>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" />
-								<span class="negro">General Rojo (5)</span>
-							</label>
-						</p>
+						{% endfor %}
 		      		</div>
 		    	</li>
 	    		<li>
@@ -112,7 +96,7 @@
 						<p>
 							<label>
 								<input type="checkbox">
-								<span class="negro">Local (5)</span>
+								<span class="negro">Local comercial(5)</span>
 							</label>
 						</p>
 						<p>

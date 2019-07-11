@@ -4,6 +4,7 @@ const router = express.Router()
 const cIndex = require('./modules/cIndex')
 const cInmobiliarias = require('./modules/inmobiliarias/cInmobiliarias')
 const cSuperuser = require('./modules/superuser/cSuperuser')
+const cLocalidades = require('./modules/localidades/cLocalidades')
 
 function auth(req, res, next) {
 	if (req.session.auth) {
@@ -35,6 +36,8 @@ router.get('/Admin/Inicio/listaajax', cSuperuser.listaajax)
 router.post('/Admin/Inmobiliarias', cSuperuser.postInmobiliarias)
 router.get('/Admin/Inmobiliaria/:id', cSuperuser.getModificarInmobiliaria)
 router.get('/Admin/Inmobiliaria/Elminar/:id', cSuperuser.getEliminar)
+router.get('/Admin/Localidades', auth, cLocalidades.getLista)
+router.get('/Admin/Localidades/listaajax', cLocalidades.listaajax)
 
 router.get('/Inmobiliarias', cInmobiliarias.getAll)
 
