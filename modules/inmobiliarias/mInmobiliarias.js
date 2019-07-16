@@ -6,3 +6,15 @@ exports.getUserInmobiliaria = (usuario, contraseña) => {
     	WHERE usuario = ? AND clave = ?
     `, [ usuario, contraseña ])
 }
+
+exports.getAll = () => {
+    return db.query(`
+        select * from inmobiliarias order by nombre
+    `, [])
+}
+
+exports.getById = (id) => {
+    return db.query(`
+        select * from inmobiliarias where id = ?
+    `, [ id ])
+}

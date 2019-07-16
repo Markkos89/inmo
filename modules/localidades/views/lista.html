@@ -1,6 +1,10 @@
 {% extends '../../template.html' %}
 
 {% block content %}
+<style>
+.toast { background: red; }
+</style>
+
 <div style="padding-top: 70px; width: 90vw; margin: auto;">
 	<div style="display: flex; justify-content: space-between; align-items: center;">
 		<h3>Localidades</h3>
@@ -13,6 +17,7 @@
 	<div class="modal-content">
 		<h4>Complete el formulario</h4>
 		<input type="hidden" id="accion">
+		<input type="hidden" id="idLocalidad">
 		<div class="row">
     		<form class="col s12">
 		      	<div class="row">
@@ -26,7 +31,7 @@
 	</div>
 	<div class="modal-footer">
 		<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-		<a href="#!" class="waves-effect waves-green btn-flat red white-text" id="btnEnviar">Enviar</a>
+		<a href="#!" class="waves-effect waves-green btn-flat red white-text" id="btnEnviar" onclick="postLocalidad()">Enviar</a>
 	</div>
 </div>
 {% endblock %}
@@ -55,7 +60,66 @@
 		$("#accion").val("N")
 	})
 
+	function postLocalidad() {
+		let data =  {
+			accion: $("#accion").val(),
+			nombre: $("#nombre").val() 
+		}
 
+		if ( data.accion == "M" ) data.idLocalidad = $("#idLocalidad").val()
+
+		if ( !data.nombre.length ) {
+			M.Toast.dismissAll();
+			let toastHTML = '<span>Debe completar los campos</span>'
+	  		M.toast({html: toastHTML})
+		}
+
+		$.post("/Admin/Localidades/postLocalidad", data)
+		.then(resultado => {
+			Swal.fire({
+				type: resultado.tipo,
+				title: resultado.titulo,
+				text: resultado.texto
+			})
+			if ( resultado.tipo == "error" ) return
+			CargarTabla()
+			$('.modal').modal('close')
+		})
+	}
+
+	function Modificar(id) {
+		$.getJSON(`/Admin/Localidades/Modificar/${id}`)
+		.then(data => {
+			$("#modalLocalidades label").addClass("active")
+			$("#accion").val("M")
+			$("#idLocalidad").val(data[0].id)
+			$("#nombre").val(data[0].nombre)
+		})
+	}
+
+	function Eliminar(id) {
+		Swal.fire({
+	        title: 'Confirme',
+	        text: "¿Desea eliminar la localidad?",
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: 'Aceptar'
+	    }).then( async (result) => {
+	        if (result.value) {
+				const resultado = await $.getJSON(`/Admin/Localidades/Eliminar/${id}`)
+				Swal.fire({
+					type: resultado.tipo,
+					title: resultado.titulo,
+					text: resultado.texto
+				})
+				if ( resultado.tipo == "error" ) return
+	            CargarTabla()
+	        }
+	    })
+	}
 </script>
 {% endblock %}
  
