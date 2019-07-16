@@ -2,10 +2,10 @@ const mysql = require('mysql')
 
 const local_conn = mysql.createConnection({
     user: "root",
-    password: "root",
+    password: "",
     host: "localhost",
     port: "3306",
-    database: "inmoville", 
+    database: "inmovillage", 
     dateStrings : true
 })
 

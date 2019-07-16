@@ -1,0 +1,36 @@
+{% extends '../../template.html' %}
+
+{% block content %}
+<style>
+.toast { background: red; }
+</style>
+
+<div style="padding-top: 70px; width: 90vw; margin: auto;">
+	<div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>Posts</h3>
+	</div>
+	<div id="tabla">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                {% for i in inmobiliarias %}
+                <tr>
+                    <td>{{ i.nombre }}</td>
+                    <td>
+                        <a href="/Admin/Posts/Alta/{{ i.id }}" class="waves-effect red waves-light btn">Agregar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+ 
