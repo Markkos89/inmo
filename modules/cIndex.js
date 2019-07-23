@@ -2,7 +2,6 @@ const mLocalidades = require("./localidades/mLocalidades")
 const mIndex = require('./mIndex')
 
 exports.getIndex = async (req, res) => {
-	const localidades = await mLocalidades.getLocalidades()
 	const slider = [
 		{
 			titulo: 'Slide One',
@@ -30,11 +29,14 @@ exports.getIndex = async (req, res) => {
 		}
 	]
 	const posts = await mIndex.getPosts()
-	for ( x = 0; x < posts.length; x++ ) {
-		posts[x].fotos = await mIndex.getFotos(posts[x].id)
+	let cantByUbicacion = 0
+	if ( posts.length ) {
+		for ( x = 0; x < posts.length; x++ ) {
+			posts[x].fotos = await mIndex.getFotos(posts[x].id)
+		}
+
+		cantByUbicacion = await mIndex.getCountByUbicacion()
 	}
-	console.log(posts)
-	console.log(posts[0].fotos)
 	// const alquileres = [
 	// 	{ 
 	// 		id: 1,
@@ -87,7 +89,7 @@ exports.getIndex = async (req, res) => {
 	// ]
 	res.render('index', {
 		slider,
-		localidades,
-		posts
+		posts,
+		cantByUbicacion
 	})
 }

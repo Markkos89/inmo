@@ -12,3 +12,11 @@ exports.getFotos = (id) => {
 		where id_post_fk = ?
 	`, [ id ])
 }
+
+exports.getCountByUbicacion = () => {
+	return db.query(`
+		select l.nombre as nombre, count(p.id_localidad_fk) as suma from posts p
+		left join localidades l on l.id = p.id_localidad_fk
+		group by p.id_localidad_fk
+	`, [])
+}
