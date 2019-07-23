@@ -37,7 +37,7 @@
   				</div>
 			</div>
 			<div>
-				Mostrando {{ alquileres.length }} de {{ alquileres.length }} publicaciones
+				Mostrando {{ posts.length }} de {{ posts.length }} publicaciones
 			</div>
 		</div>
 		<div class="col m3 l3 s12">
@@ -109,51 +109,51 @@
 		    	</li>
 		  	</ul>
 		</div>
-		<div class="col m9 l9 s12">
-		{% for a in alquileres %}
-			<div class="row">
-				<div class="card alquilerCard">
-					<div class="card-content" style="padding: 0;">
-						<div class="row" style="margin-bottom: 0; position: relative;">
-							<div class="col m5 l5 s12 cardContent">
-								<div class="card-image">	
-									<div class="carousel carousel-slider center carouselCard" data-indicators="true">
-										<div class="left izquierda">
-											<a href="Previo" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+		<div class="col m9 l9 s12" id="posts">
+			{% for p in posts %}
+				<div class="row">
+					<div class="card alquilerCard">
+						<div class="card-content" style="padding: 0;">
+							<div class="row" style="margin-bottom: 0; position: relative;">
+								<div class="col m5 l5 s12 cardContent">
+									<div class="card-image">	
+										<div class="carousel carousel-slider center carouselCard" data-indicators="true">
+											<div class="left izquierda">
+												<a href="Previo" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+											</div>
+											<div class="right derecha">
+												<a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+											</div>
+											{% for f in p.fotos %}
+											<div class="carousel-item white-text center middle-indicator" href="#one!">
+												<img class="responsive-img" src="/uploads/posts/{{ f.path }}" alt="" />
+											</div>
+											{% endfor %}
 										</div>
-										<div class="right derecha">
-											<a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
-										</div>
-										{% for f in a.fotos%}
-										<div class="carousel-item white-text center middle-indicator" href="#one!">
-											<img class="responsive-img" src="/images/{{ f.path }}" alt="" />
-										</div>
-										{% endfor %}
+										<a href="#modal1" class="modal-trigger btn-floating btn-large waves-effect waves-light red plusButton"><i class="material-icons">add</i></a>	
 									</div>
-									<a href="#modal1" class="modal-trigger btn-floating btn-large waves-effect waves-light red plusButton"><i class="material-icons">add</i></a>	
 								</div>
-							</div>
-							<div class="col m7 s12 textos" style="padding: 10px;">
-								<p class="tituloCard">{{ a.titulo }}</p>
-								<p class="product-desc">12.000 m² cubiertos</p>
-								<div class="price-container" style="margin-top: 4px;">
-									<p class="price-offer" style="font-size: 16px;">{{ a.descripcion }}</p>
+								<div class="col m7 s12 textos" style="padding: 10px;">
+									<p class="tituloCard">{{ p.descripcion_corta }}</p>
+									<p class="product-desc">12.000 m² cubiertos</p>
+									<div class="price-container" style="margin-top: 4px;">
+										<p class="price-offer" style="font-size: 16px;">{{ p.descripcion }}</p>
+									</div>
 								</div>
+								<div style="position: absolute; bottom: 0; right: 20px; font-size: 14px;">Publicado el dia {{ p.fecha }}</div>
 							</div>
-							<div style="position: absolute; bottom: 0; right: 20px; font-size: 14px;">Publicado hace 4 dias</div>
 						</div>
-					</div>
-					<div class="card-action valign-wrapper">
-						<div class="col m5 l5 s12">
-							<span class="precioCard">{{ a.precio }}</span>
-						</div>
-						<div class="col m7 l7 s12 botonCard">
-							<div><a href="#modal2" class="modal-trigger red waves-effect waves-light btn-small">Contactar</a></div>
+						<div class="card-action valign-wrapper">
+							<div class="col m5 l5 s12">
+								<span class="precioCard">${{ p.precio }}</span>
+							</div>
+							<div class="col m7 l7 s12 botonCard">
+								<div><a href="#modal2" class="modal-trigger red waves-effect waves-light btn-small">Contactar</a></div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		{% endfor %}
+			{% endfor %}
 		</div>
 	</div>
 </div>
@@ -232,7 +232,19 @@
 				$('nav').addClass("backInactive").removeClass("backActive")
 			}
 		})
+
+		// getPosts()
 	})
+
+	$('select').formSelect();
+	$('.collapsible').collapsible();
+	$('.modal').modal({
+		dismissible: false,
+		onOpenStart: function() {
+			$("input, textarea").val("").removeClass('valid').removeClass('invalid')
+		}
+	});
+	$('textarea#mensaje').characterCounter();
 
 	$('.moveNextCarousel').click(function(e){
 		e.preventDefault()
@@ -245,16 +257,6 @@
 		e.stopPropagation()
 		$(this).closest('.carousel').carousel('next')
 	})
-
-	$('select').formSelect();
-	$('.collapsible').collapsible();
-	$('.modal').modal({
-		dismissible: false,
-		onOpenStart: function() {
-			$("input, textarea").val("").removeClass('valid').removeClass('invalid')
-		}
-	});
-	$('textarea#mensaje').characterCounter();
 
 	$("#btnEnviar").click(() => {
 		$('.toast').hide()
@@ -299,6 +301,17 @@
 	  		M.toast({html: toastHTML})			
 		}
 	})
+
+	// getPosts = () => {
+	// 	$.ajax({
+	//         method: "GET",
+	//         url: "/posts",
+	//         success: function(data) {
+	//             let tablecontent = $($.parseHTML(data))
+	//             $('#posts').html(tablecontent)
+	//         }
+	//     })	
+	// }	
 
 </script>
 {% endblock %}

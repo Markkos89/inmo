@@ -13,11 +13,11 @@
     </div>
 
     <div class="row">
-        <form class="col s12" id="formAlta" action="/Admin/Posts" method="post" enctype="multipart/form-data">
+        <form class="col s12" id="formAlta" action="/Admin/Posts" method="post">
             <input type="hidden" id="idInmobiliaria" value="{{ inmobiliaria[0].id }}">
             <div class="row">
                 <div class="input-field col s6 m3">
-                    <select>
+                    <select id="localidad">
                         <option value="" disabled selected>Elija Localidad</option>
                         {% for l in localidades %}
                         <option value="{{ l.id }}">{{ l.nombre }}</option>
@@ -34,7 +34,7 @@
                     <label for="precio">Precio</label>
                 </div>
                 <div class="file-field input-field col s6 m3">
-                    <div class="btn">
+                    <div class="waves-effect waves-red btn-flat red white-text btn">
                         <span>Fotos</span>
                         <input type="file" id="myFiles" multiple>
                     </div>
@@ -49,6 +49,9 @@
                     <label for="descripcion">Descripcion</label>
                 </div>
             </div>
+            <div class="row">
+                <a href="#!" class="waves-effect waves-red btn-flat red white-text" onclick="EnviarPost()" id="btnEnviar">Enviar</a>
+            </div>
         </form>
     </div>
 </div>
@@ -60,6 +63,88 @@
     $(function () {
         $('select').formSelect()
     })
+
+    EnviarPost = async () => {
+        let data = {}
+        data.idInmobiliaria = $("#idInmobiliaria").val()
+        data.localidad = $("#localidad").val()
+        data.descripcion_corta = $("#descripcion_corta").val()
+        data.precio = $("#precio").val()
+        archivos = document.getElementById("myFiles").files
+        data.descripcion = $("#descripcion").val()
+
+        if ( !Validaciones(data) ) return
+
+        const res = await $.post("/Admin/Posts", data)
+
+        if ( archivos.length > 0 && res.tipo == "success" ) {
+            let formData  = new FormData()
+            formData.append("idPost", res.insertId)
+            for (x = 0; x < archivos.length; x++) {
+                formData.append("myFiles", archivos[x]);
+            }
+    
+            const options = {
+                method: "POST",
+                body: formData
+            };
+    
+            const res2 = await fetch("/Admin/Post/Uploadfile", options)
+
+            res && Swal.fire({
+                type: res.tipo,
+                title: res.titulo,
+                text: res.texto,
+            }).then(() => {
+                console.log("hola")
+                location.reload()
+            })
+        } else {
+            res && Swal.fire({
+                type: res.tipo,
+                title: res.titulo,
+                text: res.texto,
+            }).then(() => {
+                console.log("hola")
+                location.reload()
+            })
+        }
+        console.log(res)
+    }
+
+    Validaciones = (data) => {
+        console.log(data)
+        $("input").removeClass('invalid')
+        $("#localidad").parent().removeClass('invalid')
+        let bandera = true
+
+        if ( !data.localidad ) {
+            $("#localidad").parent().addClass('invalid')
+            bandera = false
+        }
+
+        if ( !data.descripcion_corta.length ) {
+            $("#descripcion_corta").addClass('invalid')
+            bandera = false
+        }
+
+        if ( !data.precio.length ) {
+            $("#precio").addClass('invalid')
+            bandera = false
+        }
+
+        if ( $("#myFiles").val() == "" ) {
+            $("#nombre").addClass('invalid')
+            bandera = false
+        }
+
+        if ( !data.descripcion.length ) {
+            $("#descripcion").addClass('invalid')
+            bandera = false
+        }
+
+        return bandera
+    }
 
     // let files = document.forms["formAlta"]["myFiles"].files
 </script>

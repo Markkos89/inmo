@@ -55,6 +55,8 @@ router.get('/logout', logout)
     // POSTS
     router.get('/Admin/Posts', auth, cPosts.getLista)
     router.get('/Admin/Posts/Alta/:id', auth, cPosts.getAlta)
+    router.post('/Admin/Posts', cPosts.postAlta)
+    router.post('/Admin/Post/Uploadfile', cPosts.postUploadFiles)
 
 // RUTAS INMOBILIARIA
     router.get('/Inmobiliarias', cInmobiliarias.getAll)
