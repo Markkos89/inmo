@@ -62,14 +62,18 @@
 		    	<li>
 		      		<div class="collapsible-header"><i class="material-icons">place</i>Ubicacion</div>
 		      		<div class="collapsible-body">
-		      			{% for l in localidades %}
+		      			{% if cantByUbicacion.length %}
+		      			{% for l in cantByUbicacion %}
 		      			<p>
 							<label>
 								<input type="checkbox" />
-								<span class="negro">{{ l.nombre }}</span>
+								<span class="negro">{{ l.nombre }} ({{ l.suma }})</span>
 							</label>
 						</p>
 						{% endfor %}
+						{% else %}
+							<p>No hay posts cargados</p>
+						{% endif %}
 		      		</div>
 		    	</li>
 	    		<li>
@@ -110,6 +114,7 @@
 		  	</ul>
 		</div>
 		<div class="col m9 l9 s12" id="posts">
+			{% if posts.length %}
 			{% for p in posts %}
 				<div class="row">
 					<div class="card alquilerCard">
@@ -154,6 +159,11 @@
 					</div>
 				</div>
 			{% endfor %}
+			{% else %}
+				<div class="row">
+					<h3>No hay post cargados</h3>
+				</div>
+			{% endif %}
 		</div>
 	</div>
 </div>
