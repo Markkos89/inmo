@@ -1,3 +1,7 @@
+body, html {
+	font-size: 85%;
+}
+
 #alquileresContainer {
 	margin: auto;
 	position: relative;

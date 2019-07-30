@@ -23,11 +23,11 @@ app.use(session({
     saveUninitialized: true
 }))
 
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
     if ( req.session.user != undefined && req.session.user != null ) {
-        app.locals.user = req.session.user
+        res.locals.user = req.session.user
     } else {
-    	app.locals.user = null
+    	res.locals.user = null
     }
     next()
 })
