@@ -28,7 +28,9 @@ function logout(req, res) {
 }
 
 router.get('/', cIndex.getIndex)
+router.get('/posts', cIndex.getPosts)
 router.get('/logout', logout)
+router.post('/post/filtro', cIndex.getFiltroPosts)
 
 // RUTAS ADMIN
 

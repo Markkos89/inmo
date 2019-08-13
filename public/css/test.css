@@ -5,6 +5,16 @@ img {vertical-align: middle;}
   position: relative;
 }
 
+#post .card {
+	height: 300px; border-top: 4px solid red;
+}
+
+.subtitulos {
+	text-decoration: underline;
+	font-weight: bold;
+	color: black;
+}
+
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
@@ -52,7 +62,7 @@ img {vertical-align: middle;}
   top: 0;
 }
 
-#contenedorSlide {
+.contenedorSlide {
 	display: flex;
 	flex-direction: row;
 	height: 80%;
@@ -64,8 +74,19 @@ img {vertical-align: middle;}
 	width: 60%;
 	padding: 5px 15px;
 	position: relative;
-	border-bottom: 1px solid rgba(160,160,160,0.2);;
+	border-bottom: 1px solid rgba(160,160,160,0.2);
 }
+.postDescription {
+	max-height: 80%;
+	overflow: hidden;
+	text-overflow: ellipsis; 
+}
+.price-container {
+	max-height: calc(1em * 4);
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+.price-offer { margin: 0; }
 .slideshow-footer { 
 	height: 20%;
 	padding: 20px; display: flex; justify-content: space-between;
@@ -81,7 +102,7 @@ img {vertical-align: middle;}
 }
 
 @media only screen and (max-width: 600px) {
-	#contenedorSlide {
+	.contenedorSlide {
 		display: flex;
 		flex-direction: column;
 		height: 85%;
@@ -98,7 +119,7 @@ img {vertical-align: middle;}
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1100px) {
-	#contenedorSlide {
+	.contenedorSlide {
 		flex-direction: row;	
 		height: 80%;
 	}
