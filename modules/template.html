@@ -49,8 +49,8 @@
 				<li><a href="/">Inicio</a></li>
 				{% if !user %}
 				<li><a href="/Inmobiliarias">Inmobiliarias</a></li>
-				<li><a href="#">Contacto</a></li>
-				<li><a href="#modal3" class="modal-trigger waves-effect waves-light">Ingresar</a></li>
+				<li><a href="#modal2" class="modal-trigger waves-effect waves-light">Contacto</a></li>
+				<!-- <li><a href="#modal3" class="modal-trigger waves-effect waves-light">Ingresar</a></li> -->
 				{% else %}
 				{% if user.rol != "inmobiliaria" %}
 				<li><a href="/Admin/Inicio">Inmobiliarias</a></li>

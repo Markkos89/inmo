@@ -1,6 +1,7 @@
 const mPosts = require('./mPosts')
 const mInmobiliarias = require('../inmobiliarias/mInmobiliarias')
 const mLocalidades = require('../localidades/mLocalidades')
+const mIndex = require('../mIndex')
 const multer = require('multer')
 
 exports.getLista = async (req, res) => {
@@ -8,6 +9,18 @@ exports.getLista = async (req, res) => {
     res.render("posts/views/lista", {
         inmobiliarias
     })
+}
+
+exports.getListaById = async (req, res) => {
+    const { id } = req.params
+    const posts = await mPosts.getByInmobiliaria(id)
+    if ( posts.length ) {
+        for ( x = 0; x < posts.length; x++ ) {
+            posts[x].fotos = await mIndex.getFotos(posts[x].id);
+        }
+    }
+    console.log(posts)
+    res.render(`posts/views/lista`, { posts, id })
 }
 
 exports.getAlta = async (req, res) => {

@@ -15,3 +15,13 @@ exports.insertFotos = (idPost, nombre) => {
 		values (?, ?)
 	`, [ idPost, nombre ])
 }
+
+exports.getByInmobiliaria = (id) => {
+	return db.query(`
+		select p.*, i.nombre, DATE_FORMAT(p.fecha_creacion,'%d/%m/%Y') AS fecha, l.nombre as localidadtxt 
+		from posts p
+		left join inmobiliarias i on i.id = p.id_inmobiliaria_fk
+		left join localidades l on l.id = p.id_localidad_fk
+		where id_inmobiliaria_fk = ?
+	`, [ id ])
+}

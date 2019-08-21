@@ -64,6 +64,7 @@ router.post('/post/filtro', cIndex.getFiltroPosts)
 
     // POSTS
     router.get('/Admin/Posts', auth, cPosts.getLista)
+    router.get('/Admin/Posts/Inmobiliaria/:id', auth, cPosts.getListaById)
     router.get('/Admin/Posts/Alta/:id', auth, cPosts.getAlta)
     router.post('/Admin/Posts', cPosts.postAlta)
     router.post('/Admin/Post/Uploadfile', cPosts.postUploadFiles)
