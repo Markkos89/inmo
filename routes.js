@@ -5,6 +5,7 @@ const cIndex = require('./modules/cIndex')
 const cInmobiliarias = require('./modules/inmobiliarias/cInmobiliarias')
 const cSuperuser = require('./modules/superuser/cSuperuser')
 const cLocalidades = require('./modules/localidades/cLocalidades')
+const cCategorias = require('./modules/categorias/cCategorias')
 const cPosts = require('./modules/posts/cPosts')
 
 function auth(req, res, next) {
@@ -53,6 +54,13 @@ router.post('/post/filtro', cIndex.getFiltroPosts)
     router.post('/Admin/Localidades/postLocalidad', cLocalidades.postLocalidad)
     router.get('/Admin/Localidades/Modificar/:id', cLocalidades.getModificar)
     router.get('/Admin/Localidades/Eliminar/:id', cLocalidades.getEliminar)
+
+    // CATEGORIAS
+    router.get('/Admin/Categorias', auth, cCategorias.getLista)
+    router.get('/Admin/Categorias/listaajax', cCategorias.listaajax)
+    router.post('/Admin/Categorias/postCategoria', cCategorias.postCategoria)
+    router.get('/Admin/Categorias/Modificar/:id', cCategorias.getModificar)
+    router.get('/Admin/Categorias/Eliminar/:id', cCategorias.getEliminar)
 
     // POSTS
     router.get('/Admin/Posts', auth, cPosts.getLista)
