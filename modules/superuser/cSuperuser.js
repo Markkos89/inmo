@@ -29,12 +29,15 @@ exports.getInicio = (req, res) => {
 
 exports.postInmobiliarias = async (req, res) => {
     console.log(req.body)
+    let mensaje;
     if ( req.body.accion == "N") {
-        await mSuperuser.insertInmobiliaria(req.body)        
+        await mSuperuser.insertInmobiliaria(req.body)
+        mensaje = { tipo: "success", titulo: "Exito", texto: "Inmobiliaria Agregada" }
     } else {
         await mSuperuser.updateInmobiliaria(req.body)
+        mensaje = { tipo: "success", titulo: "Exito", texto: "Inmobiliaria Modificada" }
     }
-    res.send({ exito: "OK"})
+    res.send(mensaje)
 }
 
 exports.listaajax = async (req, res) => {
@@ -48,6 +51,17 @@ exports.getModificarInmobiliaria = async (req, res) => {
 }
 
 exports.getEliminar = async (req, res) => {
-    await mSuperuser.deleteInmobiliaria(req.params.id)
-    res.send({ exito: "OK" })
+    let mensaje = { tipo: "success", titulo: "Exito", texto: "Inmobiliaria Eliminada" }
+    let posts = await mSuperuser.getPostsByInmobiliaria(req.params.id)
+    if ( posts.length ) {
+        mensaje = { 
+            tipo: "warning", 
+            titulo: "Alerta", 
+            texto: `No puede borrar esta inmobiliaria ya que la misma tiene ${posts.length} post${posts.length > 1 ? "s" : ""} publicado${posts.length > 1 ? "s" : ""}` 
+        }
+    } else {
+        let resultado = await mSuperuser.deleteInmobiliaria(req.params.id)
+        if ( !resultado.affectedRows ) mensaje = { tipo: "error", titulo: "Error", texto: "Hubo un error al procesar la solicitud" }
+    }
+    res.send(mensaje)
 }

@@ -53,18 +53,18 @@
 				<li class="active">
 		      		<div class="collapsible-header"><i class="material-icons">filter_drama</i>Categorias</div>
 		      		<div class="collapsible-body">
-		      			<p>
-							<label>
-								<input type="checkbox" />
-								<span class="negro">Alquiler (23)</span>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" />
-								<span class="negro">En venta (15)</span>
-							</label>
-						</p>
+		      			{% if cantByCategoria.length %}
+			      			{% for l in cantByCategoria %}
+			      			<p>
+								<label>
+									<input class="checkboxFiltro" type="checkbox" data-filtro="categoria" data-nombre="{{ l.nombre }}" data-id="{{ l.idCategoria }}" />
+									<span class="negro">{{ l.nombre }} ({{ l.suma }})</span>
+								</label>
+							</p>
+							{% endfor %}
+						{% else %}
+							<p>No hay categorias cargadas</p>
+						{% endif %}
 		      		</div>
 	    		</li>
 		    	<li>
@@ -74,52 +74,41 @@
 			      			{% for l in cantByUbicacion %}
 			      			<p>
 								<label>
-									<input class="ubicacionFiltro" type="checkbox" data-id="{{ l.idLocalidad }}" />
+									<input class="checkboxFiltro" type="checkbox" data-filtro="ubicacion" data-nombre="{{ l.nombre }}" data-id="{{ l.idLocalidad }}" />
 									<span class="negro">{{ l.nombre }} ({{ l.suma }})</span>
 								</label>
 							</p>
 							{% endfor %}
 						{% else %}
-							<p>No hay posts cargados</p>
+							<p>No hay ubicaciones cargadas</p>
 						{% endif %}
 		      		</div>
 		    	</li>
 	    		<li>
 		      		<div class="collapsible-header"><i class="material-icons">whatshot</i>Tipo de propiedad</div>
 		      		<div class="collapsible-body">
-		      			<p>
-							<label>
-								<input type="checkbox">
-								<span class="negro">Terrenos (43)</span>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox">
-								<span class="negro">Casa (36)</span>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox">
-								<span class="negro">Departamento (33)</span>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox">
-								<span class="negro">Local comercial(5)</span>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox">
-								<span class="negro">Campo (4)</span>
-							</label>
-						</p>
+		      			{% if cantByTipoPropiedad.length %}
+			      			{% for l in cantByTipoPropiedad %}
+			      			<p>
+								<label>
+									<input class="checkboxFiltro" type="checkbox" data-filtro="tipopropiedad" data-nombre="{{ l.nombre }}" data-id="{{ l.idTipoPropiedad }}" />
+									<span class="negro">{{ l.nombre }} ({{ l.suma }})</span>
+								</label>
+							</p>
+							{% endfor %}
+						{% else %}
+							<p>No hay categorias cargadas</p>
+						{% endif %}
 		      		</div>
 		    	</li>
+		    	<li style="color: white;">
+		    		<div style="padding: 1rem; background: #F44336 !important;">
+		    			<i style="width: 2rem; font-size: 1.6rem; display: inline-block; text-align: center; margin-right: 1rem;" class="material-icons">search</i>Filtrar</div>
+		    	</li>
 		  	</ul>
+		  	<div>
+		  		<p>Publicaciones filtradas por:</p>
+		  	</div>
 		</div>
 
 		<!-- POSTS -->
@@ -207,13 +196,6 @@
 			}else{
 				$('nav').addClass("backInactive").removeClass("backActive")
 			}
-			// if($(window).scrollTop() > filtro) {
-			// 	$("#filtrooo").addClass("fixeame")
-			// 	$("#posts").addClass("offset-l3")
-			// } else {
-			// 	$("#filtrooo").removeClass("fixeame")
-			// 	$("#posts").removeClass("offset-l3")
-			// }
 		})
 	})
 
@@ -319,32 +301,57 @@
 	    })
 	}
 
-	$(".ubicacionFiltro").change(async function() {
-		let inputsChecked = 0;
-		let arr = [];
-		$.each($(".ubicacionFiltro"), (index, item) => {
-			if ( $(item).prop("checked") ) { 
-				inputsChecked++;
-				arr.push($(item).attr("data-id"))
-			}
-		});
+	// $(".ubicacionFiltro").change(async function() {
+	// 	let inputsChecked = 0;
+	// 	let arr = [];
+	// 	$.each($(".ubicacionFiltro"), (index, item) => {
+	// 		if ( $(item).prop("checked") ) { 
+	// 			inputsChecked++;
+	// 			arr.push($(item).attr("data-id"))
+	// 		}
+	// 	});
 
-		console.log(inputsChecked)
-		console.log(arr)
-		if ( inputsChecked == 0 ) { 
-			getPosts()
+	// 	console.log(inputsChecked)
+	// 	console.log(arr)
+	// 	if ( inputsChecked == 0 ) { 
+	// 		getPosts()
+	// 	} else {
+	// 		let data = { info: arr }
+	// 		console.log(data)
+	// 		let resultado = await $.post("/post/filtro", data)
+	// 		let tablecontent = $($.parseHTML(resultado))
+ //            $('#posts').html(tablecontent)
+	// 		var conteo = $(".slideshow-container")
+	// 		$.each(conteo, (index, item) => {
+	// 			showSlides(slideIndex, $(item).find(".mySlides"));	
+	// 		})
+	// 	}
+	// })
+
+	let filtro = []
+	$(".checkboxFiltro").click(function() {
+		if ( $(this).prop("checked") ) {
+			filtro.push({ 
+				"filtro": $(this).attr("data-filtro"),
+				"id": $(this).attr("data-id"),
+				"nombre": $(this).attr("data-nombre")
+			})			
 		} else {
-			let data = { info: arr }
-			console.log(data)
-			let resultado = await $.post("/post/filtro", data)
-			let tablecontent = $($.parseHTML(resultado))
-            $('#posts').html(tablecontent)
-			var conteo = $(".slideshow-container")
-			$.each(conteo, (index, item) => {
-				showSlides(slideIndex, $(item).find(".mySlides"));	
-			})
+			for (i = 0; i < filtro.length; i++) {
+			  	var id = filtro[i].id;
+			  	var nombre = filtro[i].nombre;
+			  	var filter = filtro[i].filtro;
+			  	if (
+			  		id == $(this).attr("data-id") && 
+			  		nombre == $(this).attr("data-nombre") &&
+			  		filter == $(this).attr("data-filtro")
+			  	) {
+			    	filtro.splice(i, 1);
+			  	}
+			}
 		}
-	})
+		console.table(filtro);
+	});
 
 </script>
 {% endblock %}

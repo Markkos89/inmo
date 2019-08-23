@@ -26,6 +26,24 @@
                     <label>Localidad</label>
                 </div>
                 <div class="input-field col s6 m3">
+                    <select id="categoria">
+                        <option value="" disabled selected>Elija Categoria</option>
+                        {% for l in categorias %}
+                        <option value="{{ l.id }}">{{ l.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Categoria</label>
+                </div>
+                <div class="input-field col s6 m3">
+                    <select id="tipoPropiedad">
+                        <option value="" disabled selected>Elija Tipo de Propiedad</option>
+                        {% for l in tipoPropiedad %}
+                        <option value="{{ l.id }}">{{ l.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Tipo de Propiedad</label>
+                </div>
+                <div class="input-field col s6 m3">
                     <input id="descripcion_corta" type="text" class="validate">
                     <label for="descripcion_corta">Titulo</label>
                 </div>
@@ -72,6 +90,8 @@
         data.precio = $("#precio").val()
         archivos = document.getElementById("myFiles").files
         data.descripcion = $("#descripcion").val()
+        data.categoria = $("#categoria").val()
+        data.tipopropiedad = $("#tipoPropiedad").val()
 
         if ( !Validaciones(data) ) return
 
@@ -115,11 +135,21 @@
     Validaciones = (data) => {
         console.log(data)
         $("input").removeClass('invalid')
-        $("#localidad").parent().removeClass('invalid')
+        $("#localidad, #categoria, #tipoPropiedad").parent().removeClass('invalid')
         let bandera = true
 
         if ( !data.localidad ) {
             $("#localidad").parent().addClass('invalid')
+            bandera = false
+        }
+
+        if ( !data.categoria ) {
+            $("#categoria").parent().addClass('invalid')
+            bandera = false
+        }
+
+        if ( !data.tipopropiedad ) {
+            $("#tipoPropiedad").parent().addClass('invalid')
             bandera = false
         }
 

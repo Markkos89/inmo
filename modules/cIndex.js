@@ -31,9 +31,15 @@ exports.getIndex = async (req, res) => {
 	const posts = await mIndex.getPosts()
 	let cantByUbicacion = 0
 	cantByUbicacion = await mIndex.getCountByUbicacion()
+	let cantByCategoria = 0
+	cantByCategoria = await mIndex.getCountByCategoria()
+	let cantByTipoPropiedad = 0
+	cantByTipoPropiedad = await mIndex.getCountByTipoPropiedad()
 	res.render('index', {
 		slider,
-		cantByUbicacion
+		cantByUbicacion,
+		cantByCategoria,
+		cantByTipoPropiedad
 	})
 }
 

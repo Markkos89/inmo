@@ -2,7 +2,10 @@ const mPosts = require('./mPosts')
 const mInmobiliarias = require('../inmobiliarias/mInmobiliarias')
 const mLocalidades = require('../localidades/mLocalidades')
 const mIndex = require('../mIndex')
+const mCategorias = require('../categorias/mCategorias')
+const mTiposDePropiedad = require('../tipospropiedad/mTiposDePropiedad')
 const multer = require('multer')
+const fs = require('fs');
 
 exports.getLista = async (req, res) => {
     const inmobiliarias = await mInmobiliarias.getAll()
@@ -14,21 +17,31 @@ exports.getLista = async (req, res) => {
 exports.getListaById = async (req, res) => {
     const { id } = req.params
     const posts = await mPosts.getByInmobiliaria(id)
-    if ( posts.length ) {
-        for ( x = 0; x < posts.length; x++ ) {
-            posts[x].fotos = await mIndex.getFotos(posts[x].id);
+    res.render(`posts/views/lista`, { posts, id })
+}
+
+exports.getListaByIdAjax = async (req, res) => {
+    const { id } = req.params
+    const posteos = await mPosts.getByInmobiliaria(id)
+    if ( posteos.length ) {
+        for ( x = 0; x < posteos.length; x++ ) {
+            posteos[x].fotos = await mIndex.getFotos(posteos[x].id);
         }
     }
-    console.log(posts)
-    res.render(`posts/views/lista`, { posts, id })
+    console.log(posteos)
+    res.render('posts/views/posts', { posteos })
 }
 
 exports.getAlta = async (req, res) => {
     const inmobiliaria = await mInmobiliarias.getById(req.params.id)
     const localidades = await mLocalidades.getLocalidades()
+    const categorias = await mCategorias.getAll()
+    const tipoPropiedad = await mTiposDePropiedad.getAll()
     res.render("posts/views/alta", {
         inmobiliaria,
-        localidades
+        localidades,
+        categorias,
+        tipoPropiedad
     })
 }
 
@@ -66,5 +79,38 @@ exports.postUploadFiles = (req, res) => {
             await mPosts.insertFotos(req.body.idPost, req.files[x].filename);
         }
         res.send({ exito: " OK "});
+    });
+}
+
+exports.getEliminar = async (req, res) => {
+    const { id, id_inmobiliaria } = req.params;
+    let mensaje;
+    const fotos = await mPosts.getFotosByPost(id);
+    for ( x = 0; x < fotos.length; x++ ) {
+        remove_image(fotos[x].path)
+    }
+    await mPosts.deleteFotos(id)
+    const resultado = await mPosts.deletePost(id, id_inmobiliaria);
+    if ( !resultado.affectedRows ) {
+        mensaje = { tipo: "error", titulo: "Error", texto: `Hubo un error al eliminar el post` } 
+    } else {
+        mensaje = { tipo: "success", titulo: "Exito", texto: `Post Eliminado` }
+    }
+    res.send(mensaje)
+}
+
+function remove_image(archivo) {
+    let path = `./public/uploads/posts/${archivo}`;
+    console.log(path)
+    fs.exists(path, function(exists) {
+        if(exists) {
+            console.log('*****************encontradoo*****************.');
+            console.log('Archivo encontrado. Eliminando...');
+            fs.unlink(path, function(){
+                console.log("archivo borrado!");
+            });
+        } else {
+            console.log('Archivo no encontrado, no se puede eliminar');
+        }
     });
 }

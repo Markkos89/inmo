@@ -15,21 +15,31 @@ exports.getInmobiliarias = () => {
 
 exports.insertInmobiliaria = (obj) => {
 	return db.query(`
-		insert into inmobiliarias (nombre, direccion, celular, mail, usuario, clave)
-		values (?, ?, ?, ?, ?, ?)
+		insert into inmobiliarias (nombre, direccion, celular, mail)
+		values (?, ?, ?, ?)
 	`, [ obj.nombre, obj.direccion, obj.celular, obj.email, obj.usuario, obj.clave ])
+	// , usuario, clave
+	// , ?, ?
 }
 
 exports.updateInmobiliaria = (obj) => {
 	return db.query(`
-		update inmobiliarias set nombre = ?, direccion = ?, celular = ?, mail = ?, usuario = ?, clave = ?
+		update inmobiliarias set nombre = ?, direccion = ?, celular = ?, mail = ?
 		where id = ?
-	`, [ obj.nombre, obj.direccion, obj.celular, obj.email, obj.usuario, obj.clave, obj.id ])
+	`, [ obj.nombre, obj.direccion, obj.celular, obj.email, obj.id ])
+	// usuario = ?, clave = ?
+	// obj.usuario, obj.clave,
 }
 
 exports.getInmobiliariaById = (id) => {
 	return db.query(`
 		select * from inmobiliarias where id = ?
+	`, [ id ])
+}
+
+exports.getPostsByInmobiliaria = (id) => {
+	return db.query(`
+		select * from posts where id_inmobiliaria_fk = ?
 	`, [ id ])
 }
 

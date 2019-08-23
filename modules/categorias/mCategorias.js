@@ -25,6 +25,12 @@ exports.updateCategoria = (obj) => {
     `, [ obj.nombre, obj.idCategoria ])
 }
 
+exports.getPostsByCategoria = (id) => {
+    return db.query(`
+        select * from posts where id_categoria_fk = ?
+    `, [ id ])
+}
+
 exports.deleteCategoria = (id) => {
     return db.query(`
         delete from categorias where id = ?

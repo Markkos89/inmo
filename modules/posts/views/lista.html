@@ -19,52 +19,17 @@ span.precioCard {
 span.negro { color: black; }
 </style>
 
-<div style="padding: 70px 20px 0 20px; width: 100vw;">
+<div style="padding-top: 70px; width: 90vw; margin: auto;">
 	<div style="display: flex; justify-content: space-between; align-items: center;">
         <h3>Posts de: {{ posts[0].nombre }}</h3>
+        <div>
+            <a href="/Admin/Posts/Alta/{{ id }}" class="waves-effect waves-light red btn" id="btnAgregar">Agregar</a>
+            <a href="/Admin/Inicio" class="waves-effect waves-light red btn">Volver</a>
+        </div>
 	</div>
 
-    <div class="row">
-        {% for p in posts %}
-            <div class="col m12 l6 s12">
-                <div class="card">
-                    <div class="contenedorSlide">
-                        <div class="slideshow-container">
-                            {% for f in p.fotos %}
-                            <div class="mySlides fade">
-                                <div class="numbertext">{{ loop.index }} / {{ p.fotos.length }}</div>
-                                <img src="/uploads/posts/{{ f.path }}" style="width:100%; height: 100%;">
-                            </div>
-
-                            <a class="prev" onclick="plusSlides(-1, this)">&#10094;</a>
-                            <a class="next" onclick="plusSlides(1, this)">&#10095;</a>
-                            {% endfor %}
-                        </div>
-                        <div class="slideshow-container2">
-                            <div class="postDescription">
-                                <span class="tituloCard" style="text-transform: uppercase;">{{ p.descripcion_corta }}</span>
-                                <p>
-                                    <span class="subtitulos">Categoria:</span> Alquiler <br><br>
-                                    <span class="subtitulos">Localidad:</span> {{ p.localidadtxt }}
-                                </p>
-                                <div class="price-container">
-                                    <p class="price-offer" style="font-size: 16px;"><span class="subtitulos">Caracteristicas:</span> {{ p.descripcion }}</p>
-                                </div>
-                            </div>
-                            <div class="publishedAt">Publicado el dia {{ p.fecha }}</div>
-                        </div>
-                    </div>
-                    <div class="slideshow-footer">
-                        <div>
-                            <span class="precioCard">${{ p.precio }}</span>
-                        </div>
-                        <div class="">
-                            <a href="/Admin/Posts/Editar/{{ p.id }}/{{ p.id_inmobiliaria_fk }}" class="red waves-effect waves-light btn-small">Editar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+    <div class="row" id="posteos">
+        
     </div>
 </div>
 
@@ -73,9 +38,45 @@ span.negro { color: black; }
 {% block scripts %}
 <script type="text/javascript">
 
-$(function() {
-    getPosts()
+$(function(){
+    CargarPosts()
 })
+
+async function EliminarPost(id, idInmobiliaria) {
+    Swal.fire({
+        title: 'Confirme',
+        text: "¿Desea eliminar esta publicacion?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Aceptar'
+    }).then( async (result) => {
+        if (result.value) {
+            const resultado = await $.getJSON(`/Admin/Posts/Eliminar/${id}/${idInmobiliaria}`);
+            Swal.fire({
+                type: resultado.tipo,
+                title: resultado.titulo,
+                text: resultado.texto
+            })
+            if ( resultado.tipo == "error" ) return
+            CargarPosts()
+        }
+    })    
+}
+
+function CargarPosts() {
+    $.ajax({
+        method: "GET",
+        url: `/Admin/Posts/Inmobiliaria/Ajax/{{ id }}`,
+        success: function(data) {
+            let tablecontent = $($.parseHTML(data))
+            $('#posteos').html(tablecontent)
+            getPosts()
+        }
+    })
+}
 
 var slideIndex = 1;
 

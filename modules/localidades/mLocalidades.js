@@ -24,6 +24,12 @@ exports.updateLocalidad = (obj) => {
 	`, [ obj.nombre, obj.idLocalidad ])
 }
 
+exports.getPostsByLocalidad = (id) => {
+	return db.query(`
+        select * from posts where id_localidad_fk = ?
+    `, [ id ])
+}
+
 exports.deleteLocalidad = (id) => {
 	return db.query(`
 		delete from localidades where id = ?

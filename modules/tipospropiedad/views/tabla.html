@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for i in tipos %}
+        <tr>
+            <td>{{ i.nombre }}</td>
+            <td>
+          		<a href="#modalTiposPropiedad" class="modal-trigger waves-effect red waves-light btn" onclick="Modificar('{{ i.id }}')">Editar</a>
+                <a class="waves-effect red waves-light btn" id="btnEliminar" onclick="Eliminar('{{ i.id }}')">Eliminar</a>
+			</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

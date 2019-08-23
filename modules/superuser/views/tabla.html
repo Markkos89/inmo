@@ -5,8 +5,8 @@
             <th>Direccion</th>
             <th>Mail</th>
             <th>Celular</th>
-            <th>Usuario</th>
-            <th>Clave</th>
+            <!-- <th>Usuario</th>
+            <th>Clave</th> -->
             <th>Acciones</th>
         </tr>
     </thead>
@@ -18,8 +18,8 @@
             <td>{{ i.direccion }}</td>
             <td>{{ i.mail }}</td>
             <td>{{ i.celular }}</td>
-            <td>{{ i.usuario }}</td>
-            <td>{{ i.clave }}</td>
+            <!-- <td>{{ i.usuario }}</td>
+            <td>{{ i.clave }}</td> -->
             <td>
           		<a href="#modalInmo" class="btnEditar modal-trigger waves-effect red waves-light btn" onclick="Modificar('{{ i.id }}')">Editar</a>
                 <a class="waves-effect red waves-light btn" id="btnEliminar" onclick="Eliminar('{{ i.id }}')">Eliminar</a>

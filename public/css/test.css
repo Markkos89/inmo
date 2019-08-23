@@ -65,7 +65,8 @@ img {vertical-align: middle;}
 .contenedorSlide {
 	display: flex;
 	flex-direction: row;
-	height: 80%;
+	min-height: 300px;
+	max-height: 260px;
 }
 .slideshow-container {
 	width: 40%;

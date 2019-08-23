@@ -33,7 +33,16 @@ exports.postCategoria = async (req, res) => {
 
 exports.getEliminar = async (req, res) => {
 	let mensaje = { tipo: "success", titulo: "Exito", texto: "Categoria Eliminada" }
-	let resultado = await mCategorias.deleteCategoria(req.params.id)
-	if ( !resultado.affectedRows ) mensaje = { tipo: "error", titulo: "Error", texto: "Hubo un error al procesar la solicitud" }
+	let posts = await mCategorias.getPostsByCategoria(req.params.id)
+	if ( posts.length ) {
+		mensaje = { 
+			tipo: "warning", 
+			titulo: "Alerta", 
+			texto: `No puede borrar esta categoria ya que la misma esta siendo utilizada en ${posts.length} post${posts.length > 1 ? "s" : ""}` 
+		}
+	} else {
+		let resultado = await mCategorias.deleteCategoria(req.params.id)
+		if ( !resultado.affectedRows ) mensaje = { tipo: "error", titulo: "Error", texto: "Hubo un error al procesar la solicitud" }
+	}
 	res.send(mensaje)
 }
