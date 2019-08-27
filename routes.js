@@ -78,6 +78,8 @@ router.post('/post/filtro', cIndex.getFiltroPosts)
     router.get('/Admin/Posts/Eliminar/:id/:id_inmobiliaria', cPosts.getEliminar)
     router.post('/Admin/Posts', cPosts.postAlta)
     router.post('/Admin/Post/Uploadfile', cPosts.postUploadFiles)
+    router.get('/Admin/Posts/Editar/:id/:id_inmobiliaria', cPosts.getModificar)
+    router.get('/Admin/Posts/Foto/:id', cPosts.removeFoto)
 
 // RUTAS INMOBILIARIA
     router.get('/Inmobiliarias', cInmobiliarias.getAll)

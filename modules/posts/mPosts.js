@@ -32,6 +32,12 @@ exports.getFotosByPost = (id) => {
 	`, [ id ])
 }
 
+exports.getFotoById = id => {
+	return db.query(`
+		select * from fotos_x_posts where id = ?
+	`, [ id ])
+}
+
 exports.deletePost = (id, idInmobiliaria) => {
 	return db.query(`
 		delete from posts where id = ? and id_inmobiliaria_fk = ?
@@ -41,5 +47,21 @@ exports.deletePost = (id, idInmobiliaria) => {
 exports.deleteFotos = (id) => {
 	return db.query(`
 		delete from fotos_x_posts where id_post_fk = ?
+	`, [ id ])
+}
+
+exports.deleteFotoById = (id) => {
+	return db.query(`
+		delete from fotos_x_posts where id = ?
+	`, [ id ])
+}
+
+exports.getPostById = id => {
+	return db.query(`
+		select p.*, ifnull(p.titulo, '') as titulotxt, i.nombre, DATE_FORMAT(p.fecha_creacion,'%d/%m/%Y') AS fecha, l.nombre as localidadtxt 
+		from posts p
+		left join inmobiliarias i on i.id = p.id_inmobiliaria_fk
+		left join localidades l on l.id = p.id_localidad_fk
+		where p.id = ?
 	`, [ id ])
 }

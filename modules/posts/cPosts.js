@@ -99,18 +99,48 @@ exports.getEliminar = async (req, res) => {
     res.send(mensaje)
 }
 
+exports.getModificar = async (req, res) => {
+    const { id, id_inmobiliaria } = req.params;
+    const fotos = await mPosts.getFotosByPost(id);
+    console.log("FOTOS ", fotos)
+    const post = await mPosts.getPostById(id);
+    console.log("POST ", post)
+    const localidades = await mLocalidades.getLocalidades()
+    const categorias = await mCategorias.getAll()
+    const tipoPropiedad = await mTiposDePropiedad.getAll()
+    res.render("posts/views/modificar", {
+        fotos,
+        post,
+        localidades,
+        categorias,
+        tipoPropiedad
+    })
+}
+
+exports.removeFoto = async (req, res) => {
+    const { id } = req.params;
+    const foto = await mPosts.getFotoById(id);
+    if ( foto.length ) await remove_image(foto[0].path)
+    await mPosts.deleteFotoById(foto[0].id)
+    res.send({ mensaje: "OK" })
+}
+
 function remove_image(archivo) {
-    let path = `./public/uploads/posts/${archivo}`;
-    console.log(path)
-    fs.exists(path, function(exists) {
-        if(exists) {
-            console.log('*****************encontradoo*****************.');
-            console.log('Archivo encontrado. Eliminando...');
-            fs.unlink(path, function(){
-                console.log("archivo borrado!");
-            });
-        } else {
-            console.log('Archivo no encontrado, no se puede eliminar');
-        }
-    });
+    return new Promise((resolve, reject) => {
+        let path = `./public/uploads/posts/${archivo}`;
+        console.log(path)
+        fs.exists(path, function(exists) {
+            if(exists) {
+                console.log('*****************encontradoo*****************.');
+                console.log('Archivo encontrado. Eliminando...');
+                fs.unlink(path, function(){
+                    console.log("archivo borrado!");
+                    resolve()
+                });
+            } else {
+                console.log('Archivo no encontrado, no se puede eliminar');
+                resolve()
+            }
+        });
+    })
 }
