@@ -61,26 +61,18 @@
                     <label>Tipo de Propiedad</label>
                 </div>
                 <div class="input-field col s6 m4">
-                    <input id="descripcion_corta" type="text" class="validate" value="{{ post[0].titulotxt }}">
-                    <label for="descripcion_corta">Titulo</label>
+                    <input id="titulo" type="text" class="validate" value="{{ post[0].titulotxt }}">
+                    <label for="titulo">Titulo</label>
                 </div>
                 <div class="input-field col s6 m4">
                     <input id="precio" type="text" class="validate" value="{{ post[0].precio }}">
                     <label for="precio">Precio</label>
                 </div>
-                <div class="input-field col s6 m4 s12">
-                    <input id="precio" type="text" class="validate" value="{{ post[0].descripcion_corta }}">
-                    <label for="descripcion">Descripcion Corta</label>
-                </div>
                 <div class="col s12" style="margin-bottom: 20px;">
-                    <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <h5>Fotos</h5>
-                        <a href="#modal2" class="modal-trigger waves-effect waves-red btn-flat red white-text">Agregar</a>
-                    </div>
+                    <h5>Fotos</h5>
                     <table>
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Path</th>
                                 <th>Acciones</th>
                             </tr>
@@ -89,7 +81,6 @@
                         <tbody>
                             {% for f in fotos %}
                                 <tr>
-                                    <td>{{ f.id }}</td>
                                     <td>{{ f.path }}</td>
                                     <td>
                                         <a class="waves-effect waves-light btn modal-trigger" onclick="setPath('{{ f.path }}')" href="#modal1">Ver</a>
@@ -100,14 +91,26 @@
                         </tbody>
                       </table>
                 </div>
-            
+                <div class="file-field input-field col s12">
+                    <div class="waves-effect waves-red btn-flat red white-text btn">
+                        <span>Agregar Fotos</span>
+                        <input type="file" id="myFiles" multiple>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" id="nombre">
+                    </div>
+                </div>
+                <div class="input-field col s12">
+                    <textarea id="descripcion_corta" class="materialize-textarea">{{ post[0].descripcion_corta }}</textarea>
+                    <label for="descripcion_corta">Descripcion Corta</label>
+                </div>
                 <div class="input-field col s12">
                     <textarea id="descripcion" class="materialize-textarea">{{ post[0].descripcion }}</textarea>
                     <label for="descripcion">Descripcion</label>
                 </div>
                 <div class="col s12">
                     <a href="/Admin/Posts/Inmobiliaria/{{ post[0].id_inmobiliaria_fk }}" class="waves-effect waves-red btn-flat red white-text">Volver</a>
-                    <a href="#!" class="waves-effect waves-red btn-flat red white-text" id="btnEnviar">Enviar</a>
+                    <a href="#!" class="waves-effect waves-red btn-flat red white-text" onclick="EnviarPost()" id="btnEnviar">Enviar</a>
                 </div>
             </div>
         </form>
@@ -121,7 +124,7 @@
         <div id="imagen"></div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
     </div>
 </div>
 
@@ -166,7 +169,7 @@
         }).then( async (result) => {
             if (result.value) {
                 const resultado = await $.getJSON("/Admin/Posts/Foto/"+id);
-                console.log(resultado)
+                location.reload();
             }
         })  
     }
@@ -179,6 +182,7 @@
     EnviarPost = async () => {
         let data = {}
         data.idPost = $("#idPost").val()
+        data.titulo = $("#titulo").val()
         data.localidad = $("#localidad").val()
         data.descripcion_corta = $("#descripcion_corta").val()
         data.precio = $("#precio").val()
@@ -187,6 +191,7 @@
         data.categoria = $("#categoria").val()
         data.tipopropiedad = $("#tipoPropiedad").val()
 
+        console.log(Validaciones(data))
         if ( !Validaciones(data) ) return
 
         const res = await $.post("/Admin/Posts/Editar", data)
@@ -219,11 +224,9 @@
                 title: res.titulo,
                 text: res.texto,
             }).then(() => {
-                console.log("hola")
                 location.reload()
             })
-        }
-        console.log(res)
+        }      
     }
 
     Validaciones = (data) => {
@@ -231,6 +234,11 @@
         $("input").removeClass('invalid')
         $("#localidad, #categoria, #tipoPropiedad").parent().removeClass('invalid')
         let bandera = true
+
+        if ( !data.titulo ) {
+            $("#titulo").addClass('invalid')
+            bandera = false
+        }
 
         if ( !data.localidad ) {
             $("#localidad").parent().addClass('invalid')
@@ -254,11 +262,6 @@
 
         if ( !data.precio.length ) {
             $("#precio").addClass('invalid')
-            bandera = false
-        }
-
-        if ( $("#myFiles").val() == "" ) {
-            $("#nombre").addClass('invalid')
             bandera = false
         }
 

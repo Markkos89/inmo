@@ -44,8 +44,8 @@
                     <label>Tipo de Propiedad</label>
                 </div>
                 <div class="input-field col s6 m3">
-                    <input id="descripcion_corta" type="text" class="validate">
-                    <label for="descripcion_corta">Titulo</label>
+                    <input id="titulo" type="text" class="validate">
+                    <label for="titulo">Titulo</label>
                 </div>
                 <div class="input-field col s6 m3">
                     <input id="precio" type="text" class="validate">
@@ -60,12 +60,14 @@
                         <input class="file-path validate" type="text" id="nombre">
                     </div>
                 </div>
-            </div>
-            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="descripcion_corta" class="materialize-textarea"></textarea>
+                    <label for="descripcion_corta">Descripcion corta</label>
+                </div>
                 <div class="input-field col s12">
                     <textarea id="descripcion" class="materialize-textarea"></textarea>
                     <label for="descripcion">Descripcion</label>
-                </div>
+                </div>                
             </div>
             <div class="row">
                 <a href="/Admin/Posts/Inmobiliaria/{{ inmobiliaria[0].id }}" class="waves-effect waves-red btn-flat red white-text">Volver</a>
@@ -86,6 +88,7 @@
     EnviarPost = async () => {
         let data = {}
         data.idInmobiliaria = $("#idInmobiliaria").val()
+        data.titulo = $("#titulo").val()
         data.localidad = $("#localidad").val()
         data.descripcion_corta = $("#descripcion_corta").val()
         data.precio = $("#precio").val()
@@ -126,11 +129,9 @@
                 title: res.titulo,
                 text: res.texto,
             }).then(() => {
-                console.log("hola")
                 location.reload()
             })
         }
-        console.log(res)
     }
 
     Validaciones = (data) => {
@@ -138,6 +139,11 @@
         $("input").removeClass('invalid')
         $("#localidad, #categoria, #tipoPropiedad").parent().removeClass('invalid')
         let bandera = true
+
+        if ( !data.titulo ) {
+            $("#titulo").addClass('invalid')
+            bandera = false
+        }
 
         if ( !data.localidad ) {
             $("#localidad").parent().addClass('invalid')

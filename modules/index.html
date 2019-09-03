@@ -133,8 +133,8 @@
 				</div>
 			</div>
 		</div>
-		<h4>Modal Header</h4>
-		<p>A bunch of text</p>
+		<h4>Caracteristicas</h4>
+		<p id="descripcionPost"></p>
 	</div>
 	<div class="modal-footer">
 		<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
@@ -220,6 +220,10 @@
 		e.stopPropagation()
 		$(this).closest('.carousel').carousel('next')
 	})
+
+	function verMas(texto) {
+		$("#descripcionPost").html(texto)
+	}
 
 	$("#btnEnviar").click(() => {
 		$('.toast').hide()

@@ -2,10 +2,10 @@ const db = require('../../config/db').db()
 
 exports.insertPost = (obj) => {
 	return db.query(`
-		insert into posts (descripcion, descripcion_corta, precio, 
+		insert into posts (titulo, descripcion, descripcion_corta, precio, 
 		fecha_creacion, id_inmobiliaria_fk, id_localidad_fk, id_categoria_fk, id_tipopropiedad_fk) 
-		values (?, ?, ?, curdate(), ?, ?, ?, ?)
-	`, [ obj.descripcion, obj.descripcion_corta, obj.precio, obj.idInmobiliaria, obj.localidad, obj.categoria, obj.tipopropiedad ])
+		values (?, ?, ?, ?, curdate(), ?, ?, ?, ?)
+	`, [ obj.titulo, obj.descripcion, obj.descripcion_corta, obj.precio, obj.idInmobiliaria, obj.localidad, obj.categoria, obj.tipopropiedad ])
 }
 
 exports.insertFotos = (idPost, nombre) => {
@@ -14,6 +14,14 @@ exports.insertFotos = (idPost, nombre) => {
 		(id_post_fk, path)
 		values (?, ?)
 	`, [ idPost, nombre ])
+}
+
+exports.updatePost = (obj) => {
+	return db.query(`
+		update posts set titulo = ?, descripcion = ?,  descripcion_corta = ?, precio = ?,
+		id_localidad_fk = ?, id_categoria_fk = ?, id_tipopropiedad_fk = ?
+		where id = ?
+	`, [ obj.titulo, obj.descripcion, obj.descripcion_corta, obj.precio, obj.localidad, obj.categoria,obj.tipopropiedad, obj.idPost ])
 }
 
 exports.getByInmobiliaria = (id) => {

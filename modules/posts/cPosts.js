@@ -62,6 +62,19 @@ exports.postAlta = async (req, res) => {
     res.send(mensaje)
 }
 
+exports.postModificar = async (req, res) => {
+    console.log(req.body)
+    let mensaje
+    const resultado = await mPosts.updatePost(req.body)
+    if ( !resultado.affectedRows ) {
+        mensaje = { tipo: "error", titulo: "Error", texto: "Hubo un error al procesar la solicitud", insertId: null }
+    } else {
+        mensaje = { tipo: "success", titulo: "Exito", texto: "Post Modificado" }
+    }
+
+    res.send(mensaje)
+}
+
 exports.postUploadFiles = (req, res) => {
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
