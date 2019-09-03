@@ -16,8 +16,10 @@ exports.getLista = async (req, res) => {
 
 exports.getListaById = async (req, res) => {
     const { id } = req.params
+    const inmobiliaria = await mInmobiliarias.getById(id)
+    console.log(inmobiliaria);
     const posts = await mPosts.getByInmobiliaria(id)
-    res.render(`posts/views/lista`, { posts, id })
+    res.render(`posts/views/lista`, { inmobiliaria, posts, id })
 }
 
 exports.getListaByIdAjax = async (req, res) => {

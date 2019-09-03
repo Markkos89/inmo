@@ -1,41 +1,47 @@
-{% for p in posteos %}
-    <div class="col m12 l6 s12">
-        <div class="card">
-            <div class="contenedorSlide">
-                <div class="slideshow-container">
-                    {% for f in p.fotos %}
-                    <div class="mySlides fade">
-                        <div class="numbertext">{{ loop.index }} / {{ p.fotos.length }}</div>
-                        <img src="/uploads/posts/{{ f.path }}" style="width:100%; height: 100%;">
-                    </div>
-
-                    <a class="prev" onclick="plusSlides(-1, this)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1, this)">&#10095;</a>
-                    {% endfor %}
-                </div>
-                <div class="slideshow-container2">
-                    <div class="postDescription">
-                        <span class="tituloCard" style="text-transform: uppercase;">{{ p.descripcion_corta }}</span>
-                        <p>
-                            <span class="subtitulos">Categoria:</span> Alquiler <br><br>
-                            <span class="subtitulos">Localidad:</span> {{ p.localidadtxt }}
-                        </p>
-                        <div class="price-container">
-                            <p class="price-offer" style="font-size: 16px;"><span class="subtitulos">Caracteristicas:</span> {{ p.descripcion }}</p>
+{% if posteos.length %}
+    {% for p in posteos %}
+        <div class="col m12 l6 s12">
+            <div class="card">
+                <div class="contenedorSlide">
+                    <div class="slideshow-container">
+                        {% for f in p.fotos %}
+                        <div class="mySlides fade">
+                            <div class="numbertext">{{ loop.index }} / {{ p.fotos.length }}</div>
+                            <img src="/uploads/posts/{{ f.path }}" style="width:100%; height: 100%;">
                         </div>
+
+                        <a class="prev" onclick="plusSlides(-1, this)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1, this)">&#10095;</a>
+                        {% endfor %}
                     </div>
-                    <div class="publishedAt">Publicado el dia {{ p.fecha }}</div>
+                    <div class="slideshow-container2">
+                        <div class="postDescription">
+                            <span class="tituloCard" style="text-transform: uppercase;">{{ p.descripcion_corta }}</span>
+                            <p>
+                                <span class="subtitulos">Categoria:</span> Alquiler <br><br>
+                                <span class="subtitulos">Localidad:</span> {{ p.localidadtxt }}
+                            </p>
+                            <div class="price-container">
+                                <p class="price-offer" style="font-size: 16px;"><span class="subtitulos">Caracteristicas:</span> {{ p.descripcion }}</p>
+                            </div>
+                        </div>
+                        <div class="publishedAt">Publicado el dia {{ p.fecha }}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="slideshow-footer">
-                <div>
-                    <span class="precioCard">${{ p.precio }}</span>
-                </div>
-                <div class="">
-                    <a href="/Admin/Posts/Editar/{{ p.id }}/{{ p.id_inmobiliaria_fk }}" class="red waves-effect waves-light btn-small">Editar</a>
-                    <a onclick="EliminarPost('{{ p.id }}', '{{ p.id_inmobiliaria_fk }}')" href="#" class="red waves-effect waves-light btn-small">Eliminar</a>
+                <div class="slideshow-footer">
+                    <div>
+                        <span class="precioCard">${{ p.precio }}</span>
+                    </div>
+                    <div class="">
+                        <a href="/Admin/Posts/Editar/{{ p.id }}/{{ p.id_inmobiliaria_fk }}" class="red waves-effect waves-light btn-small">Editar</a>
+                        <a onclick="EliminarPost('{{ p.id }}', '{{ p.id_inmobiliaria_fk }}')" href="#" class="red waves-effect waves-light btn-small">Eliminar</a>
+                    </div>
                 </div>
             </div>
         </div>
+    {% endfor %}
+{% else %}
+    <div class="col m12 l6 s12">
+        No hay posts cargados para esta inmobiliaria
     </div>
-{% endfor %}
+{% endif %}
